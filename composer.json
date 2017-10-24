@@ -1,0 +1,29 @@
+{
+  "name": "carono/turbotext-api",
+  "description": "",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Aleksandr Kasyanov",
+      "email": "info@carono.ru",
+      "homepage": "http://carono.ru"
+    },
+    {
+      "name": "Aleksander Bukreev",
+      "email": "info@bonica.pro",
+      "homepage": "https://bonica.pro"
+    }
+  ],
+  "require": {
+    "carono/rest-client": "^0.1.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "carono\\turbotext\\": "src"
+    }
+  },
+  "require-dev": {
+    "electrolinux/phpquery": "^0.9.6",
+    "carono/codegen": "^0.0.4"
+  }
+}

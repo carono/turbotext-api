@@ -1,0 +1,794 @@
+    <!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="Cache-Control" content="no-cache"/>
+        <title>
+            API</title>
+        <meta name="description" content=""/>
+        <meta name="keywords" content=""/>
+        <meta name="format-detection" content="telephone=no"/>
+
+        <script type="text/javascript" src="/js/jquery-latest.min.js"></script>
+        <script type='text/javascript' src='/js/fancybox/jquery.fancybox.js'></script>
+
+        <link rel='stylesheet' type='text/css' href='/js/fancybox/jquery.fancybox.css' media='screen'/>
+
+                <link href="/css/site.css?v=ab6e6094aa38becb550216330a44f71d" rel="stylesheet" type="text/css"/>
+        <link href="/css/main.css?v=5d4c9e6e50e348c881dcc65f6057a414" rel="stylesheet" type="text/css"/>
+        <link rel="shortcut icon" href="/images/favicon.ico"/>
+        <link rel="apple-touch-icon" href="/images/apple-touch-icon.png"/>
+        <script type="text/javascript" src="/js/easyTooltip.js"></script>
+        <script type="text/javascript">
+            function removeObject() {
+                var width = $('#layer').width();
+                if (width < 1100) {
+                    $('#content').addClass('content_min');
+                }
+                else {
+                    $('#content').removeClass('content_min');
+                }
+            }
+
+            $(document).ready(function () {
+                $("a").easyTooltip();
+                                removeObject();
+            });
+            $(window).resize(function () {
+                removeObject();
+            });
+        </script>
+        <!--        <script src="https://yastatic.net/share2/share.js" async="async"></script>-->
+        <!-- End Social Buttons -->
+            </head>
+<body>
+<div id="layer">
+    <div class="layer_body">
+    <div id="header">
+        <div class="logo">
+            <a href='/' ><img src="/images/logo.png" width="124px" height="41px" alt="TurboText"/></a>        </div>
+        <div class="info">
+            <p>
+                                <div style="padding-top: 10px">
+                    <a href='/enter/' >Войти</a> или
+                    <a href='/register/' >зарегистрироваться</a>                </div>
+                </p>        </div>
+            </div>
+    <div id="menu">
+        <ul class="main">
+            <li><a href='/' >Главная</a></li><li><a href='/tt/' >Что умеет TurboText</a></li><li><a href='/register/' >Регистрация</a></li><li><a href='/partner/' >Партнёрам</a></li><li><a href='/talk/' >Форум</a></li><li><a href='/info/' >Инфо</a></li>        </ul>
+                    <ul class="second">
+                            </ul>
+            
+    </div>
+    <div id="content">
+        <div class="content">
+            <div class="content_body">
+<h1>API для работы с TurboText</h1><p>API позволяет осуществлять работу с TurboText программным способом. Все вопросы, а также пожелания относительно API, направляйте в <a href='https://www.turbotext.ru/support/'>службу поддержки</a>.</p>    <script>
+        $(document).ready(function () {
+            $("tr:odd").addClass("odd");
+            $("tr:even").addClass("even");
+        })
+    </script>
+    <h2>Описание работы с API</h2>
+    <p>URL: https://www.turbotext.ru/api<br/>
+       Формат запроса: POST</p>
+    <p>Параметры:</p>
+    <ul>
+        <li>api_key - идентификационный ключ. Доступен на этой странице для зарегистрированных пользователей;</li>
+        <li>action - выполняемое действие.</li>
+    </ul>
+    <p>Формат ответа: json. Параметры ответа:</p>
+    <ul>
+        <li>success (int) - флаг успешно ли завершилась операция;</li>
+        <li>errors (text) - сообщение об ошибке, в случае если операция завершилась неудачно.</li>
+    </ul>
+    <p><a href="/api-info/php-example/">Пример PHP-скрипта</a> для работы с API TurboText</p>
+    <h2>Возможные действия и их описание</h2><br/>
+    <h3>Работа с заказами на копирайтинг/рерайтинг/переводы</h3>
+    <div class="api_descr">
+        <table class="table" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <th>Действие</th>
+                <th>Описание</th>
+                <th style='width: 300px'>Входные данные</th>
+                <th style='width: 300px'>Выходные данные</th>
+            </tr>
+            </thead>
+            <tbody class="api">
+            <tr>
+                <td><b>get_folders</b></td>
+                <td>Возвращает все папки пользователя</td>
+                <td>отсутствуют</td>
+                <td>
+                    <ul>
+                        <li>folders (array) - массив с папками</li>
+                    </ul>
+                    <p>Каждый элемент массива содержит:</p>
+                    <ul>
+                        <li>id (int) - уникальный идентификатор папки</li>
+                        <li>name (text) - имя папки</li>
+                    </ul>
+                </td>
+            </tr>
+            <!-- tr -->
+            <tr>
+                <td><b>get_balance</b></td>
+                <td>Возвращает количество доступных средств</td>
+                <td>отсутствуют</td>
+                <td>
+                    <ul>
+                        <li>balance (float) - количество денег на балансе</li>
+                        <li>blocked_money (float) - количество замороженных средств для выполнения заказов и
+                            микрозадач
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <!-- tr -->
+            <tr>
+                <td><b>create_folder</b></td>
+                <td>Создаёт новую папку</td>
+                <td>
+                    <ul>
+                        <li>name (text) - имя новой папки</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>folder_id (int) - уникальный идентификатор созданной папки
+                </td>
+            </tr>
+            <!-- tr -->
+            <tr>
+                <td><b>get_orders</b></td>
+                <td>Возвращает все заказы пользователя в папке folder_id. Если folder_id не указано, возвращает все
+                    заказы.
+                </td>
+                <td>
+                    <ul>
+                        <li>folder_id (text) - уникальный идентификатор папки (необязательный параметр)</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>orders (array) - массив с заказами</li>
+                    </ul>
+                    <p>Каждый элемент массива содержит:</p>
+                    <ul>
+                        <li>id (int) - уникальный идентификатор (номер) заказа</li>
+                        <li>name (text) - название заказа</li>
+                        <li>price (float) - стоимость за 1000 знаков</li>
+                        <li>status (int) - статус заказа (1 - в поиске исполнителя, 2 – в работе, 3 – ожидает проверки,
+                            4 – на доработке, 5 – одобрен и оплачен)
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <!-- tr -->
+            <tr>
+                <td><b>create_order</b></td>
+                <td>Создаёт новый заказ</td>
+                <td>
+                    <ul>
+                        <li>order_title (text) - название заказа</li>
+                        <li>order_type (int) - тип заказа (1 - копирайтинг, 2 - рерайтинг)</li>
+                        <li>order_description (text) - задание для копирайтера, описание заказа</li>
+                        <li>order_text (text) - статья для рерайта, если вы заказываете рерайтинг</li>
+                        <li>order_size_from (int) - минимальное количество знаков, которое должно быть в тексте (от 300
+                            до 98000)
+                        </li>
+                        <li>order_size_to (int) - максимальное количество знаков, которое должно быть в тексте (от 300
+                            до 99000)
+                        </li>
+                        <li>folder_id (int) - идентификатор папки, в которую нужно добавить заказ</li>
+                        <li>order_time (int) - количество часов за которое нужно выполнить заказ (от 2 до 96).
+                            Необязательный параметр, значение по умолчанию - 10.
+                        </li>
+                        <li>order_price (int) - стоимость за 1000 знаков с пробелами (от 22)</li>
+                        <li>order_who_can_work (int) - кто может выполнить заказ. 0 - любой исполнитель, 1 - только
+                            исполнитель определённого уровня (нужно указать уровень в поле order_who_can_work_value), 2
+                            - только исполнители из белого списка (нужно указать id списка в поле
+                            order_who_can_work_value), 3 - только один определённый исполнитель (нужно указать id
+                            исполнителя в поле order_who_can_work_value). Параметр необязательный. Значение по умолчанию
+                            - 0.
+                        </li>
+                        <li>order_who_can_work_value (int) - в случае, если вы ограничили заказ, сделав его доступным
+                            определённой группе исполнителей параметром order_who_can_work, в этом параметре необходимо
+                            уточнить свой выбор:
+                            <ul>
+                                <li>В случае, если вы хотите сделать заказ доступным только исполнителям определённого
+                                    уровня, то укажите в этом параметре цифру, соответствующую уровню (1 - новичок, 2 -
+                                    базовый уровень, 3 - высокий уровень, 4 - профи).
+                                </li>
+                                <li>В случае, если вы хотите сделать заказ доступным только для определённого белого
+                                    списка, то укажите id списка в этом поле.
+                                </li>
+                                <li>В случае, если вы хотите сделать персональный заказ только для одного конкретного
+                                    исполнителя, то укажите в этом поле его id
+                                </li>
+                            </ul>
+                        </li>
+                        <li>order_need_anons (int) - Нужен ли вам анонс? 1 - да, 0 - нет. Необязательный параметр,
+                            значение по умолчанию - 0
+                        </li>
+                        <li>order_need_corrector (int) - Нужно ли проверить текст корректором? 1 - да, 0 - нет.
+                            Необязательный параметр, значение по умолчанию - 0
+                        </li>
+                        <li>order_need_unique (int) - Нужно ли проверить текст на уникальность? 1 - да, 0 - нет.
+                            Необязательный параметр, значение по умолчанию - 0
+                        </li>
+                        <li>order_need_image (int) - Нужно ли прикрепить к заказу картинку? 1 - да, 0 - нет.
+                            Необязательный параметр, значение по умолчанию - 0
+                        </li>
+                        <li>draft (int) - Сохранить заказ как черновик? 1 - да, 0 - нет. Необязательный параметр,
+                            значение по умолчанию - 0
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>order_id (int) - уникальный идентификатор созданного заказа
+                </td>
+            </tr>
+            <tr>
+                <td><b>get_order</b></td>
+                <td>Получает информацию о заказе order_id</td>
+                <td>
+                    <ul>
+                        <li>order_id (int) - уникальный идентификатор (номер) заказа.</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>name (text) - название заказа</li>
+                        <li>price (float) - стоимость за 1000 знаков</li>
+                        <li>status (int) - статус заказа (1 - в поиске исполнителя, 2 – в работе, 3 – ожидает проверки,
+                            4 – на доработке, 5 – одобрен и оплачен)
+                        </li>
+                        <li>worker_id (int) - уникальный идентификатор исполнителя, работающего над заказом. Если равно
+                            0, значит над заказом никто не работает.
+                        </li>
+                        <li>description (text) - задание для копирайтера, описание заказа</li>
+                        <li>date_add (datetime) - дата публикации заказа</li>
+                        <li>date_upd (datetime) - дата последнего обновления заказа</li>
+                        <li>type (int) - тип заказа (1 - копирайтинг, 2 - рерайтинг)</li>
+                        <li>min_ch (int) - минимальное необходимое количество символов</li>
+                        <li>max_ch (int) - максимальное необходимое количество символов</li>
+                        <li>title (text) - заголовок статьи</li>
+                        <li>anons (text) - анонс</li>
+                        <li>text (text) - текст статьи</li>
+                        <li>tags (text) - теги</li>
+                        <li>category (text) - категория, выбранная копирайтером</li>
+                        <li>image (text) - картинка, прикреплённая к заказу</li>
+                        <li>unique (float) - значение уникальности текста (если была заказана проверка)</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td><b>delete_order</b></td>
+                <td>Удаляет заказ order_id</td>
+                <td>
+                    <ul>
+                        <li>order_id (int) - уникальный идентификатор (номер) заказа.</li>
+                    </ul>
+                </td>
+                <td>
+                    Отсутствуют
+                </td>
+            </tr>
+            <tr>
+                <td><b>reject_order</b></td>
+                <td>Отправить заказ на доработку</td>
+                <td>
+                    <ul>
+                        <li>order_id (int) - уникальный идентификатор (номер) заказа</li>
+                        <li>text (text) - причина, по которой вы отправляете заказ на доработку</li>
+                    </ul>
+                </td>
+                <td>Отсутствуют</td>
+            </tr>
+            <tr>
+                <td><b>decline_order</b></td>
+                <td>Отклонить заказ</td>
+                <td>
+                    <ul>
+                        <li>order_id (int) - уникальный идентификатор (номер) заказа</li>
+                        <li>text (text) - причина, по которой вы отказываетесь от заказа</li>
+                    </ul>
+                </td>
+                <td>Отсутствуют</td>
+            </tr>
+            <tr>
+                <td><b>accept_order</b></td>
+                <td>Принять заказ</td>
+                <td>
+                    <ul>
+                        <li>order_id (int) - уникальный идентификатор (номер) заказа</li>
+                        <li>text (text) - комментарий (необязательно)</li>
+                    </ul>
+                </td>
+                <td>Отсутствуют</td>
+            </tr>
+            <!-- tr -->
+            <tr>
+                <td><b>move_order</b></td>
+                <td>Переместить заказ в определённую папку</td>
+                <td>
+                    <ul>
+                        <li>order_id (int) - уникальный идентификатор (номер) заказа</li>
+                        <li>folder_id (int) - уникальный идентификатор папки, в которую нужно переместить заказ.
+                    </ul>
+                </td>
+                <td>Отсутствуют</td>
+            </tr>
+            <tr>
+                <td><b>getConversation</b></td>
+                <td>Просмотереть общение по заказу</td>
+                <td>
+                    <ul>
+                        <li>order_id (int) - уникальный идентификатор (номер) заказа</li>
+                    </ul>
+                </td>
+                <td>
+                    messages_array (array) - массив, содержащий список сообщений. Каждый элемент массива содержит:
+                    <ul>
+                        <li>from_id (int) - ID пользователя от кого сообщение</li>
+                        <li>date (date) - дата отправки</li>
+                        <li>text (text) - текст сообщения</li>
+                    </ul></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p></p>
+    <h3>Работа со списками исполнителей</h3>
+    <div class="api_descr">
+        <table class="table" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <th>Действие</th>
+                <th>Описание</th>
+                <th style='width: 300px'>Входные данные</th>
+                <th style='width: 300px'>Выходные данные</th>
+            </tr>
+            </thead>
+            <tbody class="api">
+            <!-- tr -->
+            <tr>
+                <td><b>get_user</b></td>
+                <td>Возвращает информацию о пользователе</td>
+                <td>
+                    <ul>
+                        <li>user_id (int) - уникальный идентификатор пользователя</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>user_name (text) - ник пользователя</li>
+                        <li>user_rating (int) - рейтинг пользователя в системе</li>
+                        <li>user_type (int) - тип пользователя (1 - исполнитель, 2 - заказчик, 3 - корректор)</li>
+                    </ul>
+                </td>
+            </tr>
+            <!-- tr -->
+            <tr>
+                <td><b>get_lists</b></td>
+                <td>Возвращает все белые списки пользователя</td>
+                <td>Отсутствуют</td>
+                <td>
+                    <ul>
+                        <li>lists (array) - массив со списками</li>
+                    </ul>
+                    <p>Каждый элемент массива содержит:</p>
+                    <ul>
+                        <li>id (int) - уникальный идентификатор списка</li>
+                        <li>name (text) - имя списка</li>
+                    </ul>
+                </td>
+            </tr>
+            <!-- tr -->
+            <tr>
+                <td><b>get_list</b></td>
+                <td>Возвращает всех исполнителей, которые присутствуют в определённом белом списке</td>
+                <td>
+                    <ul>
+                        <li>list_id (int) - уникальный идентификатор списка</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>users (array) - массив с исполнителями</li>
+                    </ul>
+                    <p>Каждый элемент массива содержит:</p>
+                    <ul>
+                        <li>user_id (int) - уникальный идентификатор пользователя</li>
+                    </ul>
+                </td>
+            </tr>
+            <!-- tr -->
+            <tr>
+                <td><b>add_to_list</b></td>
+                <td>Добавляет пользователя в список</td>
+                <td>
+                    <ul>
+                        <li>list_id (int) - уникальный идентификатор списка, в который нужно добавить пользователя</li>
+                        <li>user_id (int) - уникальный идентификатор пользователя</li>
+                    </ul>
+                </td>
+                <td>Отсутствуют</td>
+            </tr>
+            <!-- tr -->
+            <tr>
+                <td><b>remove_from_list</b></td>
+                <td>Удаляет пользователя из списка</td>
+                <td>
+                    <ul>
+                        <li>list_id (int) - уникальный идентификатор списка, из которого нужно удалить пользователя</li>
+                        <li>user_id (int) - уникальный идентификатор пользователя</li>
+                    </ul>
+                </td>
+                <td>Отсутствуют
+                </td>
+            </tr>
+            <!-- tr -->
+            <!-- tr -->
+            <tr>
+                <td><b>add_to_black_list</b></td>
+                <td>Добавляет пользователя в черный список</td>
+                <td>
+                    <ul>
+                        <li>user_id (int) - уникальный идентификатор пользователя</li>
+                    </ul>
+                </td>
+                <td>Отсутствуют</td>
+            </tr>
+            <!-- tr -->
+            <tr>
+                <td><b>remove_from_black_list</b></td>
+                <td>Удаляет пользователя из черного списка</td>
+                <td>
+                    <ul>
+                        <li>user_id (int) - уникальный идентификатор пользователя</li>
+                    </ul>
+                </td>
+                <td>Отсутствуют
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p></p>
+    <h3>Работа с микрозадачами</h3>
+    <div class="api_descr">
+        <table class="table" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <th>Действие</th>
+                <th>Описание</th>
+                <th style='width: 300px'>Входные данные</th>
+                <th style='width: 300px'>Выходные данные</th>
+            </tr>
+            </thead>
+            <tbody class="api">
+            <tr>
+                <td><b>get_microtasks_folders</b></td>
+                <td>Возвращает все папки для микрозадач</td>
+                <td>отсутствуют</td>
+                <td>
+                    <ul>
+                        <li>folders (array) - массив с папками</li>
+                    </ul>
+                    <p>Каждый элемент массива содержит:</p>
+                    <ul>
+                        <li>id (int) - уникальный идентификатор папки</li>
+                        <li>name (text) - имя папки</li>
+                    </ul>
+                </td>
+            </tr>
+            <!-- tr -->
+            <tr>
+                <td><b>create_microtasks_folder</b></td>
+                <td>Создаёт новую папку для микрозадач</td>
+                <td>
+                    <ul>
+                        <li>name (text) - имя новой папки</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>folder_id (int) - уникальный идентификатор созданной папки
+                </td>
+            </tr>
+            <tr>
+                <td><b>get_microtasks_orders</b></td>
+                <td>Возвращает все микрозадачи в папке folder_id. Если folder_id не указано, возвращает все
+                    микрозадачи.
+                </td>
+                <td>
+                    <ul>
+                        <li>folder_id (int) - уникальный идентификатор папки (необязательный параметр)</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>orders (array) - массив с микрозадачами</li>
+                    </ul>
+                    <p>Каждый элемент массива содержит:</p>
+                    <ul>
+                        <li>id (int) - уникальный идентификатор (номер) задачи</li>
+                        <li>name (text) - название задачи</li>
+                        <li>price (float) - стоимость за выполнение задачи</li>
+                        <li>active (int) - статус задание (1 - активно, 0 – выключено)</li>
+                    </ul>
+                </td>
+            </tr>
+            <!-- tr -->
+            <tr>
+                <td><b>create_microtask</b></td>
+                <td>Создаёт новую микрозадачу</td>
+                <td>
+                    <ul>
+                        <li>microtask_title (text) - название микрозадачи</li>
+                        <li>microtask_descr (text) - подробное описание задания</li>
+                        <li>microtask_price (int) - стоимость задания в рублях (целое число больше или равное 2)</li>
+                        <li>microtask_folder_id (int) - идентификатор папки, в которую нужно добавить микрозадачу</li>
+                        <li>microtask_time (int) - количество часов за которое нужно выполнить микрозадачу (от 1 до
+                            240). Необязательный параметр, значение по умолчанию - 12.
+                        </li>
+                        <li>limit_per_user (int) - лимит для одного исполнителя (сколько заданий может выполнить 1
+                            исполнитель). 0 - без ограничений. Необязательный параметр, значение по умолчанию - 0.
+                        </li>
+                        <li>limit_per_day (int) - лимит в сутки. 0 - без ограничений. Необязательный параметр, значение
+                            по умолчанию - 0.
+                        </li>
+                        <li>limit_total (int) - лимит на общее количество выполнений задания. 0 - без ограничений.
+                            Необязательный параметр, значение по умолчанию - 0.
+                        </li>
+                        <li>who_can_work (int) - кто может выполнить заказ. 0 - любой исполнитель, 2 - только
+                            исполнители из белого списка (нужно указать id списка в поле who_can_work_value), 3 - только
+                            один определённый исполнитель (нужно указать id исполнителя в поле
+                            order_who_can_work_value). Параметр необязательный. Значение по умолчанию - 0.
+                        </li>
+                        <li>who_can_work_value (int) - в случае, если вы ограничили заказ, сделав его доступным
+                            определённой группе исполнителей параметром who_can_work, в этом параметре необходимо
+                            уточнить свой выбор:
+                            <ul>
+                                <li>В случае, если вы хотите сделать заказ доступным только для определённого белого
+                                    списка, то укажите id списка в этом поле.
+                                </li>
+                                <li>В случае, если вы хотите сделать персональный заказ только для одного конкретного
+                                    исполнителя, то укажите в этом поле его id
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>microtask_id (int) - уникальный идентификатор созданной микрозадачи
+                </td>
+            </tr>
+            <!-- tr -->
+            <tr>
+                <td><b>get_microtasks_tasks</b></td>
+                <td>Возвращает все отчёты о выполненных заданиях, ожидающие проверки, для микрозадачи microtask_id. Если
+                    microtask_id не указано, возвращает все отчёты, ожидающие проверки.
+                </td>
+                <td>
+                    <ul>
+                        <li>microtask_id (int) - уникальный идентификатор микрозадачи (необязательный параметр)</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>tasks (array) - массив с отчётами</li>
+                    </ul>
+                    <p>Каждый элемент массива содержит:</p>
+                    <ul>
+                        <li>id (int) - уникальный идентификатор (номер) отчёта</li>
+                        <li>user_id (int) - уникальный идентификатор исполнителя</li>
+                        <li>price (int) - стоимость за выполнение задачи</li>
+                        <li>text (text) - текст отчёта</li>
+                    </ul>
+                </td>
+            </tr>
+            <!-- tr -->
+            <tr>
+                <td><b>microtasks_reject_task</b></td>
+                <td>Отправить задание на доработку или отказаться от него</td>
+                <td>
+                    <ul>
+                        <li>task_id (int) - уникальный идентификатор (номер) отчёта по задаче</li>
+                        <li>text (text) - причина, по которой вы отправляете задачу на доработку или отклоняете</li>
+                        <li>decline (int) - в случае, если параметр decline равен 1, то задание будет отклонено без
+                            возможности доработки. Необязательный параметр, значение по умолчанию - 0.
+                        </li>
+                    </ul>
+                </td>
+                <td>Отсутствуют</td>
+            </tr>
+            <tr>
+                <td><b>microtasks_accept_task</b></td>
+                <td>Принять и оплатить задачу</td>
+                <td>
+                    <ul>
+                        <li>task_id (int) - уникальный идентификатор (номер) отчёта по задаче</li>
+                    </ul>
+                </td>
+                <td>Отсутствуют</td>
+            </tr>
+            <tr>
+                <td><b>microtasks_pause</b></td>
+                <td>Временно остановть выполнение микрозадачи</td>
+                <td>
+                    <ul>
+                        <li>task_id (int) - уникальный идентификатор (номер) микрозадачи</li>
+                    </ul>
+                </td>
+                <td>Отсутствуют</td>
+            </tr>
+            <tr>
+                <td><b>microtasks_play</b></td>
+                <td>Включить выполнение ранее остановленной микрозадачи</td>
+                <td>
+                    <ul>
+                        <li>task_id (int) - уникальный идентификатор (номер) отчёта по задаче</li>
+                    </ul>
+                </td>
+                <td>Отсутствуют</td>
+            </tr>
+            </tbody>
+        </table>
+    </div><br/>
+    <h3>Работа с личными сообщениями</h3>
+    <div class="api_descr">
+        <table class="table" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <th>Действие</th>
+                <th>Описание</th>
+                <th style='width: 300px'>Входные данные</th>
+                <th style='width: 300px'>Выходные данные</th>
+            </tr>
+            </thead>
+            <tbody class="api">
+            <tr>
+                <td><b>pm_get_sent</b></td>
+                <td>Получить список пользователей, кому вы отправляли личные сообщения</td>
+                <td>Отсутствуют</td>
+                <td>users_array (array) - массив, содержащий ID пользователей</td>
+            </tr>
+            <tr>
+                <td><b>pm_get_received</b></td>
+                <td>Получить список пользователей, которые вам отправляли личные сообщения</td>
+                <td>Отсутствуют</td>
+                <td>users_array (array) - массив, содержащий ID пользователей</td>
+            </tr>
+            <tr>
+                <td><b>pm_send</b></td>
+                <td>Отправить личное сообщение</td>
+                <td>
+                    <ul>
+                        <li>user_id (int) - ID пользователя, которому нужно отправить сообщение</li>
+                        <li>message (text) - текст сообщения</li>
+                    </ul>
+                </td>
+                <td>Отсутствуют</td>
+            </tr>
+            <tr>
+                <td><b>pm_get_conversation</b></td>
+                <td>Получить переписку с определённым пользователем</td>
+                <td>
+                    <ul>
+                        <li>user_id (int) - ID пользователя, переписку с которым нужно получить</li>
+                    </ul>
+                </td>
+                <td>messages_array (array) - массив, содержащий список сообщений. Каждый элемент массива содержит:
+                    <ul>
+                        <li>from_id (int) - ID пользователя от кого сообщение</li>
+                        <li>to_id (int) - ID пользователя кому сообщение</li>
+                        <li>date (date) - дата отправки</li>
+                        <li>unread (bool) - флаг прочитано сообщение или нет</li>
+                        <li>text (text) - текст сообщения</li>
+                    </ul>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+<div class="sidebar">
+        <div class="news" style='margin-top: 0px'>
+        <h3>
+            <a href='/talk/3/' >Новости TurboText</a>        </h3>
+                    <div class="date">01/08</div>
+            <div class="item">
+                <a href='/talk/post/4037/' >Черные и белые списки для авторов</a>            </div>
+            <div class="clear"></div>
+                        <div class="date">09/06</div>
+            <div class="item">
+                <a href='/talk/post/3973/' >Изменение даты стандартного вывода средств 12 июня 2017 г.</a>            </div>
+            <div class="clear"></div>
+                        <div class="date">19/05</div>
+            <div class="item">
+                <a href='/talk/post/3933/' >Смена почты для украинских пользователей. </a>            </div>
+            <div class="clear"></div>
+                        <div class="date">24/04</div>
+            <div class="item">
+                <a href='/talk/post/3892/' >Вывод средств в период майских праздников</a>            </div>
+            <div class="clear"></div>
+                        <div class="date">15/03</div>
+            <div class="item">
+                <a href='/talk/post/3843/' >Мгновенные выплаты работают</a>            </div>
+            <div class="clear"></div>
+                </div>
+            <script type="text/javascript" src="//userapi.com/js/api/openapi.js?49"></script>
+
+        <!-- VK Widget -->
+        <div id="vk_groups"></div>
+        <script type="text/javascript">
+            VK.Widgets.Group("vk_groups", {mode: 0, width: "250", height: "290"}, 24191144);
+        </script>
+        
+    </div>
+<div class="clear"></div>
+</div>
+<div id="footer">
+    <div class="info">
+        <address>&copy; 2009&ndash;2017 &laquo;TurboText&raquo; &mdash; биржа контента</address>
+                <p><!-- Время: 0.001530--></p>
+    </div>
+    <ul class="links">
+        <li><a href='/support/' >Служба поддержки и контакты</a></li>
+        <li><a href='/api-info/' >API</a></li>
+        <li><a href='/rules/' >Пользовательское соглашение</a></li>
+        <li><a href='/help/' >Справка</a></li>
+    </ul>
+    <div class="counter"><!--LiveInternet counter-->
+        <script type="text/javascript"><!--
+            document.write("<a href='//liveinternet.ru/click' " +
+                "target=_blank><img src='//counter.yadro.ru/hit?t52.2;r" +
+                escape(document.referrer) + ((typeof(screen) == "undefined") ? "" :
+                    ";s" + screen.width + "*" + screen.height + "*" + (screen.colorDepth ?
+                        screen.colorDepth : screen.pixelDepth)) + ";u" + escape(document.URL) +
+                ";h" + escape(document.title.substring(0, 80)) + ";" + Math.random() +
+                "' alt='' title='LiveInternet: показано число просмотров и" +
+                " посетителей за 24 часа' " +
+                "border='0' width='88' height='31'><\/a>")
+            //--></script><!--/LiveInternet--></div>
+    <div class="counter"><!-- begin WebMoney Transfer : accept label --><img
+                src="//megastock.ru/Doc/88x31_accept/blue_rus.gif" alt="www.megastock.ru" border="0"></div>
+    <div class="counter"><!-- begin WebMoney Transfer : attestation label --><img
+                src="//megastock.ru/doc/88x31_user/grey_rus.gif"
+                alt="Здесь находится аттестат нашего WM идентификатора 266651125383" border="0">
+                         <!-- end WebMoney Transfer : attestation label --></div>
+    <div class="clear"></div>
+</div>
+</div>
+</div>
+    <!-- Yandex.Metrika counter -->
+    <script src="/js/metrika.js" type="text/javascript"></script>
+        <noscript>
+        <div><img src="https://mc.yandex.ru/watch/924375" style="position:absolute; left:-9999px;" alt=""/></div>
+    </noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+<a id="totop" href="javascript:void(0)">
+    <img src="/images/totop.png" width="19" height="56" alt="Мотать страницу вверх" align="absmiddle" border="0"/>
+</a>
+<script type="text/javascript" src="/js/totop.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#totop").scrollToTop();
+    });
+</script>
+<script type="text/javascript" src="/js/retina-1.1.0.min.js"></script>
+<script type="text/javascript" src="/js/push/firebase.js"></script>
+
+
+</body>
+</html>
