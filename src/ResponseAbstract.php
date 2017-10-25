@@ -6,7 +6,6 @@ namespace carono\turbotext;
 
 class ResponseAbstract extends ArrayObject
 {
-    protected $_responseClasses = ['folders' => 'carono\turbotext\response\FolderResponse'];
     /**
      * @var boolean
      */
