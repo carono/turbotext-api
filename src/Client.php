@@ -8,7 +8,7 @@ class Client extends ClientAbstract
 {
     public $apiKey;
     public $url = 'www.turbotext.ru';
-    public $protocol = 'https';
+    public $protocol = 'http';
     public $method = 'POST';
     public $type = self::TYPE_FORM;
     public $output_type = self::TYPE_JSON;

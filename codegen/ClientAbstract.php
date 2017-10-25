@@ -3,7 +3,6 @@
 namespace carono\turbotext\codegen;
 
 use carono\codegen\ClassGenerator;
-use Nette\PhpGenerator\Method;
 
 class ClientAbstract extends ClassGenerator
 {

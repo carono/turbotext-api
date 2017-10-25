@@ -6,16 +6,16 @@
 
 namespace carono\turbotext\response;
 
-class ListResponse extends \carono\turbotext\ArrayObject
+class FolderElementResponse extends \carono\turbotext\ArrayObject
 {
 	/**
-	 * уникальный идентификатор списка
+	 * уникальный идентификатор папки
 	 * @var int
 	 */
 	public $id;
 
 	/**
-	 * имя списка
+	 * имя папки
 	 * @var string
 	 */
 	public $name;

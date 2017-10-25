@@ -6,7 +6,7 @@
 
 namespace carono\turbotext\response;
 
-class BalanceResponse extends \carono\turbotext\ArrayObject
+class BalanceResponse extends \carono\turbotext\ResponseAbstract
 {
 	/**
 	 * количество денег на балансе

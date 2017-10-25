@@ -43,8 +43,21 @@ class RequestAbstract extends ClassGenerator
             $params = [];
             $params['action'] = $methodData['name'];
 
+            $paramsStr = self::arrayAsPhpVar($params);
+            $method->addBody("\$params = $paramsStr;");
             if (count($methodData['params']) > 4) {
+                $config = new ConfigAbstract();
+                $config->renderToFile($methodData);
+                $className = '\\' . $config->formClassNamespace() . '\\' . $config->formClassName();
+                $method->addParameter('config');
+                $method->addComment("@param $className|array \$config");
 
+                $body = <<<PHP
+foreach ((\$config instanceof \carono\\turbotext\ConfigAbstract ? \$config->toArray() : \$config) as \$key => \$value) {
+    \$params[\$key] = \$value;
+}
+PHP;
+                $method->addBody($body);
             } else {
                 foreach ($methodData['params'] as $param) {
                     $type = formParamType($param['type']);
@@ -70,12 +83,7 @@ class RequestAbstract extends ClassGenerator
                 $className = 'carono\turbotext\Response';
             }
             $method->addComment("@return \\$className|string|\stdClass|\SimpleXMLElement");
-            $paramsStr = self::arrayAsPhpVar($params);
-            $body = <<<PHP
-\$params = $paramsStr;            
-return \$this->getClient()->getContent('api', \$params, '$className');
-PHP;
-            $method->addBody($body);
+            $method->addBody("return \$this->getClient()->getContent('api', \$params, '$className');");
         }
         return false;
     }

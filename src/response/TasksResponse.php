@@ -8,12 +8,12 @@ namespace carono\turbotext\response;
 
 class TasksResponse extends \carono\turbotext\ResponseAbstract
 {
-	protected $_responseClasses = ['tasks' => 'carono\turbotext\response\TaskResponse'];
+	protected $_responseClasses = ['tasks' => 'carono\turbotext\response\TaskElementResponse'];
 
 	/**
 	 * массив с отчётами
 	 *
-	 * @var TaskResponse[]
+	 * @var TaskElementResponse[]
 	 */
 	public $tasks = [];
 

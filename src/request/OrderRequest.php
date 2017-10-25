@@ -42,8 +42,7 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 	public function createFolder($name)
 	{
 		$params = [
-			'action' => 'create_folder',
-			'name' => $name
+			'action' => 'create_folder'
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\FolderResponse');
 	}
@@ -58,8 +57,7 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 	public function getOrders($folder_id)
 	{
 		$params = [
-			'action' => 'get_orders',
-			'folder_id' => $folder_id
+			'action' => 'get_orders'
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\OrdersResponse');
 	}
@@ -67,13 +65,17 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 
 	/**
 	 * Создаёт новый заказ
+	 * @param \carono\turbotext\config\OrderConfig|array $config
 	 * @return \carono\turbotext\response\OrderResponse|string|\stdClass|\SimpleXMLElement
 	 */
-	public function createOrder()
+	public function createOrder($config)
 	{
 		$params = [
 			'action' => 'create_order'
 		];
+		foreach (($config instanceof \carono\turbotext\ConfigAbstract ? $config->toArray() : $config) as $key => $value) {
+		    $params[$key] = $value;
+		}
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\OrderResponse');
 	}
 
@@ -86,8 +88,7 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 	public function getOrder($order_id)
 	{
 		$params = [
-			'action' => 'get_order',
-			'order_id' => $order_id
+			'action' => 'get_order'
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\OrderResponse');
 	}
@@ -101,8 +102,7 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 	public function deleteOrder($order_id)
 	{
 		$params = [
-			'action' => 'delete_order',
-			'order_id' => $order_id
+			'action' => 'delete_order'
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}
@@ -117,9 +117,7 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 	public function rejectOrder($order_id, $text)
 	{
 		$params = [
-			'action' => 'reject_order',
-			'order_id' => $order_id,
-			'text' => $text
+			'action' => 'reject_order'
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}
@@ -134,9 +132,7 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 	public function declineOrder($order_id, $text)
 	{
 		$params = [
-			'action' => 'decline_order',
-			'order_id' => $order_id,
-			'text' => $text
+			'action' => 'decline_order'
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}
@@ -151,9 +147,7 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 	public function acceptOrder($order_id, $text)
 	{
 		$params = [
-			'action' => 'accept_order',
-			'order_id' => $order_id,
-			'text' => $text
+			'action' => 'accept_order'
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}
@@ -169,9 +163,7 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 	public function moveOrder($order_id, $folder_id)
 	{
 		$params = [
-			'action' => 'move_order',
-			'order_id' => $order_id,
-			'folder_id' => $folder_id
+			'action' => 'move_order'
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}
@@ -185,8 +177,7 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 	public function getConversation($order_id)
 	{
 		$params = [
-			'action' => 'getConversation',
-			'order_id' => $order_id
+			'action' => 'getConversation'
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\MessagesResponse');
 	}

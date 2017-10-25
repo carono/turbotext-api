@@ -8,12 +8,12 @@ namespace carono\turbotext\response;
 
 class ListsResponse extends \carono\turbotext\ResponseAbstract
 {
-	protected $_responseClasses = ['lists' => 'carono\turbotext\response\ListResponse'];
+	protected $_responseClasses = ['lists' => 'carono\turbotext\response\ListElementResponse'];
 
 	/**
 	 * массив со списками
 	 *
-	 * @var ListResponse[]
+	 * @var ListElementResponse[]
 	 */
 	public $lists = [];
 

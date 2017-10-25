@@ -43,9 +43,7 @@ class MessageRequest extends \carono\turbotext\RequestAbstract
 	public function pmSend($user_id, $message)
 	{
 		$params = [
-			'action' => 'pm_send',
-			'user_id' => $user_id,
-			'message' => $message
+			'action' => 'pm_send'
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}
@@ -59,8 +57,7 @@ class MessageRequest extends \carono\turbotext\RequestAbstract
 	public function pmGetConversation($user_id)
 	{
 		$params = [
-			'action' => 'pm_get_conversation',
-			'user_id' => $user_id
+			'action' => 'pm_get_conversation'
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\MessagesResponse');
 	}

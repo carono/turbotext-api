@@ -29,8 +29,7 @@ class MicroTaskRequest extends \carono\turbotext\RequestAbstract
 	public function createMicrotasksFolder($name)
 	{
 		$params = [
-			'action' => 'create_microtasks_folder',
-			'name' => $name
+			'action' => 'create_microtasks_folder'
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\MicrotasksFolderResponse');
 	}
@@ -45,8 +44,7 @@ class MicroTaskRequest extends \carono\turbotext\RequestAbstract
 	public function getMicrotasksOrders($folder_id)
 	{
 		$params = [
-			'action' => 'get_microtasks_orders',
-			'folder_id' => $folder_id
+			'action' => 'get_microtasks_orders'
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\OrdersResponse');
 	}
@@ -54,13 +52,17 @@ class MicroTaskRequest extends \carono\turbotext\RequestAbstract
 
 	/**
 	 * Создаёт новую микрозадачу
+	 * @param \carono\turbotext\config\MicrotaskConfig|array $config
 	 * @return \carono\turbotext\response\MicrotaskResponse|string|\stdClass|\SimpleXMLElement
 	 */
-	public function createMicrotask()
+	public function createMicrotask($config)
 	{
 		$params = [
 			'action' => 'create_microtask'
 		];
+		foreach (($config instanceof \carono\turbotext\ConfigAbstract ? $config->toArray() : $config) as $key => $value) {
+		    $params[$key] = $value;
+		}
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\MicrotaskResponse');
 	}
 
@@ -74,8 +76,7 @@ class MicroTaskRequest extends \carono\turbotext\RequestAbstract
 	public function getMicrotasksTasks($microtask_id)
 	{
 		$params = [
-			'action' => 'get_microtasks_tasks',
-			'microtask_id' => $microtask_id
+			'action' => 'get_microtasks_tasks'
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\TasksResponse');
 	}
@@ -93,10 +94,7 @@ class MicroTaskRequest extends \carono\turbotext\RequestAbstract
 	public function microtasksRejectTask($task_id, $text, $decline = null)
 	{
 		$params = [
-			'action' => 'microtasks_reject_task',
-			'task_id' => $task_id,
-			'text' => $text,
-			'decline' => $decline
+			'action' => 'microtasks_reject_task'
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}
@@ -110,8 +108,7 @@ class MicroTaskRequest extends \carono\turbotext\RequestAbstract
 	public function microtasksAcceptTask($task_id)
 	{
 		$params = [
-			'action' => 'microtasks_accept_task',
-			'task_id' => $task_id
+			'action' => 'microtasks_accept_task'
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}
@@ -125,8 +122,7 @@ class MicroTaskRequest extends \carono\turbotext\RequestAbstract
 	public function microtasksPause($task_id)
 	{
 		$params = [
-			'action' => 'microtasks_pause',
-			'task_id' => $task_id
+			'action' => 'microtasks_pause'
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}
@@ -140,8 +136,7 @@ class MicroTaskRequest extends \carono\turbotext\RequestAbstract
 	public function microtasksPlay($task_id)
 	{
 		$params = [
-			'action' => 'microtasks_play',
-			'task_id' => $task_id
+			'action' => 'microtasks_play'
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}

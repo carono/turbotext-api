@@ -8,11 +8,13 @@ namespace carono\turbotext\response;
 
 class MessagesResponse extends \carono\turbotext\ResponseAbstract
 {
-	protected $_responseClasses = ['messages_array' => 'carono\turbotext\response\MessageResponse'];
+	protected $_responseClasses = [
+		'messages_array' => 'carono\turbotext\response\MessageElementResponse',
+	];
 
 	/**
 	 * массив, содержащий список сообщений. Каждый элемент массива содержит:
-	 * @var MessageResponse[]
+	 * @var MessageElementResponse[]
 	 */
 	public $messages_array = [];
 

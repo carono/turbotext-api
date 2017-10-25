@@ -10,7 +10,7 @@ class ResponseAbstract extends ClassGenerator
 
     protected function formExtends()
     {
-        if (!isset($this->params['result'])) {
+        if (strpos($this->formClassName(), 'ElementResponse')) {
             return 'carono\turbotext\ArrayObject';
         } else {
             return 'carono\turbotext\ResponseAbstract';
@@ -20,22 +20,11 @@ class ResponseAbstract extends ClassGenerator
     protected function formClassName()
     {
         $name = $this->params['name'];
-        $clear = [
-            'get_',
-            'create_',
-            '_array'
-        ];
-        foreach ($clear as $item) {
-            $name = str_ireplace($item, '', $name);
-        }
-        $name = ucfirst($name);
+        $name = formClassName($name);
         if (!isset($this->params['result']) && substr($name, -1, 1) == 's') {
-            $name = substr($name, 0, -1);
+            $name = substr($name, 0, -1) . 'Element';
         }
-
-        $arr = array_filter(explode('_', $name));
-        $arr = array_map('ucfirst', $arr);
-        return join('', $arr) . 'Response';
+        return $name . 'Response';
     }
 
     protected function formClassNamespace()
@@ -62,7 +51,7 @@ class ResponseAbstract extends ClassGenerator
             $params = $this->params['result'];
             $params['name'] = $this->params['name'];
             $element->renderToFile($params);
-            $varClass = str_replace('sResponse', 'Response', $this->formClassName());
+            $varClass = $element->formClassName();
             $properties['_responseClasses']['value'][$this->params['name']] = 'carono\turbotext\response\\' . $varClass;
             $properties[$this->params['name']] = [
                 'value' => [],

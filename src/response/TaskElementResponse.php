@@ -6,7 +6,7 @@
 
 namespace carono\turbotext\response;
 
-class TaskResponse extends \carono\turbotext\ArrayObject
+class TaskElementResponse extends \carono\turbotext\ArrayObject
 {
 	/**
 	 * уникальный идентификатор (номер) отчёта

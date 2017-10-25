@@ -11,7 +11,7 @@ abstract class RequestAbstract
     /**
      * RequestAbstract constructor.
      *
-     * @param Client $client
+     * @param Client|ClientAbstract $client
      */
     public function __construct($client)
     {

@@ -4,9 +4,25 @@ require '../vendor/autoload.php';
 require 'ClientAbstract.php';
 require 'RequestAbstract.php';
 require 'ResponseAbstract.php';
+require 'ConfigAbstract.php';
 
 use GuzzleHttp\Client;
 use carono\turbotext\codegen\ClientAbstract;
+
+function formClassName($str)
+{
+    $clear = [
+        'get_',
+        'create_',
+        '_array'
+    ];
+    foreach ($clear as $item) {
+        $str = str_ireplace($item, '', $str);
+    }
+    $arr = array_filter(explode('_', $str));
+    $arr = array_map('ucfirst', $arr);
+    return join('', $arr);
+}
 
 function formParamType($str)
 {

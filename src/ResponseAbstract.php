@@ -4,7 +4,7 @@
 namespace carono\turbotext;
 
 
-class ResponseAbstract extends ArrayObject
+abstract class ResponseAbstract extends ArrayObject
 {
     /**
      * @var boolean

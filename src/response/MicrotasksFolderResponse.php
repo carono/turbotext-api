@@ -6,7 +6,7 @@
 
 namespace carono\turbotext\response;
 
-class MicrotasksFolderResponse extends \carono\turbotext\ArrayObject
+class MicrotasksFolderResponse extends \carono\turbotext\ResponseAbstract
 {
 	/**
 	 * уникальный идентификатор созданной папки

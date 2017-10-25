@@ -8,12 +8,12 @@ namespace carono\turbotext\response;
 
 class FoldersResponse extends \carono\turbotext\ResponseAbstract
 {
-	protected $_responseClasses = ['folders' => 'carono\turbotext\response\FolderResponse'];
+	protected $_responseClasses = ['folders' => 'carono\turbotext\response\FolderElementResponse'];
 
 	/**
 	 * массив с папками
 	 *
-	 * @var FolderResponse[]
+	 * @var FolderElementResponse[]
 	 */
 	public $folders = [];
 
