@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "carono/rest-client",
-            "version": "0.1.7",
+            "version": "0.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/carono/rest-client.git",
-                "reference": "41fedfd77de0c8ffb83755509f918d8e7960dfa2"
+                "reference": "3a1bf56af1f858c8fd64b26c55da2ac94ec9fe42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/carono/rest-client/zipball/41fedfd77de0c8ffb83755509f918d8e7960dfa2",
-                "reference": "41fedfd77de0c8ffb83755509f918d8e7960dfa2",
+                "url": "https://api.github.com/repos/carono/rest-client/zipball/3a1bf56af1f858c8fd64b26c55da2ac94ec9fe42",
+                "reference": "3a1bf56af1f858c8fd64b26c55da2ac94ec9fe42",
                 "shasum": ""
             },
             "require": {
@@ -35,11 +35,12 @@
             ],
             "authors": [
                 {
-                    "name": "carono",
-                    "email": "info@carono.ru"
+                    "name": "Aleksandr Kasyanov",
+                    "email": "info@carono.ru",
+                    "homepage": "http://carono.ru"
                 }
             ],
-            "time": "2017-05-05T06:06:25+00:00"
+            "time": "2017-10-25T06:44:34+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",

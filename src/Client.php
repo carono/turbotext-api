@@ -13,6 +13,10 @@ class Client extends ClientAbstract
     public $type = self::TYPE_FORM;
     public $output_type = self::TYPE_JSON;
 
+    /**
+     * @param array $data
+     * @return array|string
+     */
     public function prepareData(array $data)
     {
         $data = parent::prepareData($data);
@@ -28,10 +32,22 @@ class Client extends ClientAbstract
      */
     public function getContent($urlRequest, $data = [], $responseClass = '\carono\turbotext\Response')
     {
-        $content = parent::getContent($urlRequest, $data);
-        return self::stdClassToResponse($content, $responseClass);
+        try {
+            $content = parent::getContent($urlRequest, $data);
+            return self::stdClassToResponse($content, $responseClass);
+        } catch (\Exception $e) {
+            $response = new Response();
+            $response->success = false;
+            $response->errors = $e->getMessage();
+            return $response;
+        }
     }
 
+    /**
+     * @param $stdClass
+     * @param $responseClass
+     * @return ResponseAbstract
+     */
     protected static function stdClassToResponse($stdClass, $responseClass)
     {
         /**
