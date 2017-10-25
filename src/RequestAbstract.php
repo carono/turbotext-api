@@ -11,7 +11,7 @@ abstract class RequestAbstract
     /**
      * RequestAbstract constructor.
      *
-     * @param ClientAbstract $client
+     * @param Client $client
      */
     public function __construct($client)
     {
@@ -19,7 +19,7 @@ abstract class RequestAbstract
     }
 
     /**
-     * @return ClientAbstract
+     * @return Client
      */
     public function getClient()
     {

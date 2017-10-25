@@ -63,20 +63,17 @@ class RequestAbstract extends ClassGenerator
                 $className = $response->formClassNamespace() . '\\' . $response->formClassName();
             } elseif ($methodData['returns']) {
                 $methodData['returns']['name'] = $methodData['name'];
+                $response->properties['asd'] = 213;
                 $response->renderToFile($methodData['returns']);
                 $className = $response->formClassNamespace() . '\\' . $response->formClassName();
             } else {
-                $className = '';
+                $className = 'carono\turbotext\Response';
             }
-            if ($className) {
-                $method->addComment("@return \\$className");
-            } else {
-                $method->addComment('@return \carono\turbotext\Response');
-            }
+            $method->addComment("@return \\$className|string|\stdClass|\SimpleXMLElement");
             $paramsStr = self::arrayAsPhpVar($params);
             $body = <<<PHP
 \$params = $paramsStr;            
-return \$this->getClient()->getContent('api', \$params);
+return \$this->getClient()->getContent('api', \$params, '$className');
 PHP;
             $method->addBody($body);
         }

@@ -6,9 +6,15 @@ use carono\codegen\ClassGenerator;
 
 class ResponseAbstract extends ClassGenerator
 {
+    public $properties = [];
+
     protected function formExtends()
     {
-        return 'carono\turbotext\ResponseAbstract';
+        if (!isset($this->params['result'])) {
+            return 'carono\turbotext\ArrayObject';
+        } else {
+            return 'carono\turbotext\ResponseAbstract';
+        }
     }
 
     protected function formClassName()
@@ -44,21 +50,28 @@ class ResponseAbstract extends ClassGenerator
 
     protected function classProperties()
     {
+        $properties = [];
         if (isset($this->params['result'])) {
+            $properties = [
+                '_responseClasses' => [
+                    'value' => [],
+                    'visibility' => 'protected'
+                ]
+            ];
             $element = new self();
             $params = $this->params['result'];
             $params['name'] = $this->params['name'];
             $element->renderToFile($params);
-            return [
-                $this->params['name'] => [
-                    'comment' => [
-                        $this->params['description'],
-                        '@var ' . str_replace('sResponse', 'Response', $this->formClassName()) . '[]'
-                    ]
+            $varClass = str_replace('sResponse', 'Response', $this->formClassName());
+            $properties['_responseClasses']['value'][$this->params['name']] = 'carono\turbotext\response\\' . $varClass;
+            $properties[$this->params['name']] = [
+                'value' => [],
+                'comment' => [
+                    $this->params['description'],
+                    "@var {$varClass}[]"
                 ]
             ];
         } else {
-            $properties = [];
             foreach ($this->params as $param) {
                 if (is_string($param)) {
                     continue;
@@ -70,8 +83,8 @@ class ResponseAbstract extends ClassGenerator
                     ]
                 ];
             }
-            return $properties;
         }
+        return $properties;
     }
 
 }

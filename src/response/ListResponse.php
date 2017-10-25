@@ -6,7 +6,7 @@
 
 namespace carono\turbotext\response;
 
-class ListResponse extends \carono\turbotext\ResponseAbstract
+class ListResponse extends \carono\turbotext\ArrayObject
 {
 	/**
 	 * уникальный идентификатор списка

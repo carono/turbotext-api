@@ -6,7 +6,7 @@
 
 namespace carono\turbotext\response;
 
-class UserResponse extends \carono\turbotext\ResponseAbstract
+class UserResponse extends \carono\turbotext\ArrayObject
 {
 	/**
 	 * уникальный идентификатор пользователя

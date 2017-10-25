@@ -8,12 +8,14 @@ namespace carono\turbotext\response;
 
 class UsersResponse extends \carono\turbotext\ResponseAbstract
 {
+	protected $_responseClasses = ['users' => 'carono\turbotext\response\UserResponse'];
+
 	/**
 	 * массив с исполнителями
 	 *
 	 * @var UserResponse[]
 	 */
-	public $users;
+	public $users = [];
 
 
 }

@@ -8,12 +8,14 @@ namespace carono\turbotext\response;
 
 class OrdersResponse extends \carono\turbotext\ResponseAbstract
 {
+	protected $_responseClasses = ['orders' => 'carono\turbotext\response\OrderResponse'];
+
 	/**
 	 * массив с микрозадачами
 	 *
 	 * @var OrderResponse[]
 	 */
-	public $orders;
+	public $orders = [];
 
 
 }

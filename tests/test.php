@@ -10,9 +10,6 @@ $client->apiKey = '';
 //$balance = $client->order()->getBalance();
 //print_r($balance);
 $folders = $client->order()->getFolders();
-$folder = $folders->folders;
-//$folder->
-print_r($folder);
-//$x = $result->folders;
-//print_r($x[1]->name);
-//print_r($result->blocked_money);
+$folder = $folders->folders[0];
+print_r($folder->name);
+//print_r($folders);

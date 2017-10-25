@@ -6,7 +6,7 @@
 
 namespace carono\turbotext\response;
 
-class OrderResponse extends \carono\turbotext\ResponseAbstract
+class OrderResponse extends \carono\turbotext\ArrayObject
 {
 	/**
 	 * уникальный идентификатор (номер) задачи

@@ -6,7 +6,7 @@
 
 namespace carono\turbotext\response;
 
-class MicrotaskResponse extends \carono\turbotext\ResponseAbstract
+class MicrotaskResponse extends \carono\turbotext\ArrayObject
 {
 	/**
 	 * уникальный идентификатор созданной микрозадачи

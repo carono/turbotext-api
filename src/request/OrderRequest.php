@@ -10,34 +10,34 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 {
 	/**
 	 * Возвращает все папки пользователя
-	 * @return \carono\turbotext\response\FoldersResponse
+	 * @return \carono\turbotext\response\FoldersResponse|string|\stdClass|\SimpleXMLElement
 	 */
 	public function getFolders()
 	{
 		$params = [
 			'action' => 'get_folders'
 		];
-		return $this->getClient()->getContent('api', $params);
+		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\FoldersResponse');
 	}
 
 
 	/**
 	 * Возвращает количество доступных средств
-	 * @return \carono\turbotext\response\BalanceResponse
+	 * @return \carono\turbotext\response\BalanceResponse|string|\stdClass|\SimpleXMLElement
 	 */
 	public function getBalance()
 	{
 		$params = [
 			'action' => 'get_balance'
 		];
-		return $this->getClient()->getContent('api', $params);
+		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\BalanceResponse');
 	}
 
 
 	/**
 	 * Создаёт новую папку
 	 * @param string $name имя новой папки
-	 * @return \carono\turbotext\response\FolderResponse
+	 * @return \carono\turbotext\response\FolderResponse|string|\stdClass|\SimpleXMLElement
 	 */
 	public function createFolder($name)
 	{
@@ -45,7 +45,7 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 			'action' => 'create_folder',
 			'name' => $name
 		];
-		return $this->getClient()->getContent('api', $params);
+		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\FolderResponse');
 	}
 
 
@@ -53,7 +53,7 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 	 * Возвращает все заказы пользователя в папке folder_id. Если folder_id не указано, возвращает все
 	 *                     заказы.
 	 * @param string $folder_id уникальный идентификатор папки (необязательный параметр)
-	 * @return \carono\turbotext\response\OrdersResponse
+	 * @return \carono\turbotext\response\OrdersResponse|string|\stdClass|\SimpleXMLElement
 	 */
 	public function getOrders($folder_id)
 	{
@@ -61,27 +61,27 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 			'action' => 'get_orders',
 			'folder_id' => $folder_id
 		];
-		return $this->getClient()->getContent('api', $params);
+		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\OrdersResponse');
 	}
 
 
 	/**
 	 * Создаёт новый заказ
-	 * @return \carono\turbotext\response\OrderResponse
+	 * @return \carono\turbotext\response\OrderResponse|string|\stdClass|\SimpleXMLElement
 	 */
 	public function createOrder()
 	{
 		$params = [
 			'action' => 'create_order'
 		];
-		return $this->getClient()->getContent('api', $params);
+		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\OrderResponse');
 	}
 
 
 	/**
 	 * Получает информацию о заказе order_id
 	 * @param int $order_id уникальный идентификатор (номер) заказа.
-	 * @return \carono\turbotext\response\OrderResponse
+	 * @return \carono\turbotext\response\OrderResponse|string|\stdClass|\SimpleXMLElement
 	 */
 	public function getOrder($order_id)
 	{
@@ -89,14 +89,14 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 			'action' => 'get_order',
 			'order_id' => $order_id
 		];
-		return $this->getClient()->getContent('api', $params);
+		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\OrderResponse');
 	}
 
 
 	/**
 	 * Удаляет заказ order_id
 	 * @param int $order_id уникальный идентификатор (номер) заказа.
-	 * @return \carono\turbotext\Response
+	 * @return \carono\turbotext\Response|string|\stdClass|\SimpleXMLElement
 	 */
 	public function deleteOrder($order_id)
 	{
@@ -104,7 +104,7 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 			'action' => 'delete_order',
 			'order_id' => $order_id
 		];
-		return $this->getClient()->getContent('api', $params);
+		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}
 
 
@@ -112,7 +112,7 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 	 * Отправить заказ на доработку
 	 * @param int $order_id уникальный идентификатор (номер) заказа
 	 * @param string $text причина, по которой вы отправляете заказ на доработку
-	 * @return \carono\turbotext\Response
+	 * @return \carono\turbotext\Response|string|\stdClass|\SimpleXMLElement
 	 */
 	public function rejectOrder($order_id, $text)
 	{
@@ -121,7 +121,7 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 			'order_id' => $order_id,
 			'text' => $text
 		];
-		return $this->getClient()->getContent('api', $params);
+		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}
 
 
@@ -129,7 +129,7 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 	 * Отклонить заказ
 	 * @param int $order_id уникальный идентификатор (номер) заказа
 	 * @param string $text причина, по которой вы отказываетесь от заказа
-	 * @return \carono\turbotext\Response
+	 * @return \carono\turbotext\Response|string|\stdClass|\SimpleXMLElement
 	 */
 	public function declineOrder($order_id, $text)
 	{
@@ -138,7 +138,7 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 			'order_id' => $order_id,
 			'text' => $text
 		];
-		return $this->getClient()->getContent('api', $params);
+		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}
 
 
@@ -146,7 +146,7 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 	 * Принять заказ
 	 * @param int $order_id уникальный идентификатор (номер) заказа
 	 * @param string $text комментарий (необязательно)
-	 * @return \carono\turbotext\Response
+	 * @return \carono\turbotext\Response|string|\stdClass|\SimpleXMLElement
 	 */
 	public function acceptOrder($order_id, $text)
 	{
@@ -155,7 +155,7 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 			'order_id' => $order_id,
 			'text' => $text
 		];
-		return $this->getClient()->getContent('api', $params);
+		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}
 
 
@@ -164,7 +164,7 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 	 * @param int $order_id уникальный идентификатор (номер) заказа
 	 * @param int $folder_id уникальный идентификатор папки, в которую нужно переместить заказ.
 	 *
-	 * @return \carono\turbotext\Response
+	 * @return \carono\turbotext\Response|string|\stdClass|\SimpleXMLElement
 	 */
 	public function moveOrder($order_id, $folder_id)
 	{
@@ -173,14 +173,14 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 			'order_id' => $order_id,
 			'folder_id' => $folder_id
 		];
-		return $this->getClient()->getContent('api', $params);
+		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}
 
 
 	/**
 	 * Просмотереть общение по заказу
 	 * @param int $order_id уникальный идентификатор (номер) заказа
-	 * @return \carono\turbotext\response\MessagesResponse
+	 * @return \carono\turbotext\response\MessagesResponse|string|\stdClass|\SimpleXMLElement
 	 */
 	public function getConversation($order_id)
 	{
@@ -188,6 +188,6 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 			'action' => 'getConversation',
 			'order_id' => $order_id
 		];
-		return $this->getClient()->getContent('api', $params);
+		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\MessagesResponse');
 	}
 }

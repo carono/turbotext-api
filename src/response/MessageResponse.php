@@ -6,7 +6,7 @@
 
 namespace carono\turbotext\response;
 
-class MessageResponse extends \carono\turbotext\ResponseAbstract
+class MessageResponse extends \carono\turbotext\ArrayObject
 {
 	/**
 	 * ID пользователя от кого сообщение

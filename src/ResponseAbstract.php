@@ -4,8 +4,9 @@
 namespace carono\turbotext;
 
 
-class ResponseAbstract extends \ArrayObject
+class ResponseAbstract extends ArrayObject
 {
+    protected $_responseClasses = ['folders' => 'carono\turbotext\response\FolderResponse'];
     /**
      * @var boolean
      */
@@ -15,13 +16,13 @@ class ResponseAbstract extends \ArrayObject
      */
     public $errors;
 
+
     /**
-     * ResponseAbstract constructor.
-     *
-     * @param array $input
+     * @param $property
+     * @return mixed|null
      */
-    public function __construct($input = [])
+    public function getResponseClass($property)
     {
-        parent::__construct($input, self::ARRAY_AS_PROPS, "ArrayIterator");
+        return isset($this->_responseClasses[$property]) ? $this->_responseClasses[$property] : null;
     }
 }

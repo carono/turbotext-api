@@ -10,27 +10,27 @@ class MessageRequest extends \carono\turbotext\RequestAbstract
 {
 	/**
 	 * Получить список пользователей, кому вы отправляли личные сообщения
-	 * @return \carono\turbotext\Response
+	 * @return \carono\turbotext\Response|string|\stdClass|\SimpleXMLElement
 	 */
 	public function pmGetSent()
 	{
 		$params = [
 			'action' => 'pm_get_sent'
 		];
-		return $this->getClient()->getContent('api', $params);
+		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}
 
 
 	/**
 	 * Получить список пользователей, которые вам отправляли личные сообщения
-	 * @return \carono\turbotext\Response
+	 * @return \carono\turbotext\Response|string|\stdClass|\SimpleXMLElement
 	 */
 	public function pmGetReceived()
 	{
 		$params = [
 			'action' => 'pm_get_received'
 		];
-		return $this->getClient()->getContent('api', $params);
+		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}
 
 
@@ -38,7 +38,7 @@ class MessageRequest extends \carono\turbotext\RequestAbstract
 	 * Отправить личное сообщение
 	 * @param int $user_id ID пользователя, которому нужно отправить сообщение
 	 * @param string $message текст сообщения
-	 * @return \carono\turbotext\Response
+	 * @return \carono\turbotext\Response|string|\stdClass|\SimpleXMLElement
 	 */
 	public function pmSend($user_id, $message)
 	{
@@ -47,14 +47,14 @@ class MessageRequest extends \carono\turbotext\RequestAbstract
 			'user_id' => $user_id,
 			'message' => $message
 		];
-		return $this->getClient()->getContent('api', $params);
+		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}
 
 
 	/**
 	 * Получить переписку с определённым пользователем
 	 * @param int $user_id ID пользователя, переписку с которым нужно получить
-	 * @return \carono\turbotext\response\MessagesResponse
+	 * @return \carono\turbotext\response\MessagesResponse|string|\stdClass|\SimpleXMLElement
 	 */
 	public function pmGetConversation($user_id)
 	{
@@ -62,6 +62,6 @@ class MessageRequest extends \carono\turbotext\RequestAbstract
 			'action' => 'pm_get_conversation',
 			'user_id' => $user_id
 		];
-		return $this->getClient()->getContent('api', $params);
+		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\MessagesResponse');
 	}
 }

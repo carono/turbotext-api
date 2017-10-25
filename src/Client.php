@@ -20,12 +20,32 @@ class Client extends ClientAbstract
         return $data;
     }
 
-    public function getContent($urlRequest, $data = [])
+    /**
+     * @param $urlRequest
+     * @param array $data
+     * @param string $responseClass
+     * @return mixed
+     */
+    public function getContent($urlRequest, $data = [], $responseClass = '\carono\turbotext\Response')
     {
         $content = parent::getContent($urlRequest, $data);
-        $response = new Response();
-        foreach ($content as $key => $value) {
-            $response->$key = $value;
+        return self::stdClassToResponse($content, $responseClass);
+    }
+
+    protected static function stdClassToResponse($stdClass, $responseClass)
+    {
+        /**
+         * @var ResponseAbstract $response
+         */
+        $response = new $responseClass();
+        foreach ($stdClass as $key => $value) {
+            if (method_exists($response, 'getResponseClass') && ($class = $response->getResponseClass($key)) && is_array($value)) {
+                foreach ($value as $item) {
+                    $response->{$key}[] = self::stdClassToResponse($item, $class);
+                }
+            } else {
+                $response->$key = $value;
+            }
         }
         return $response;
     }
