@@ -2,3 +2,4 @@
 /vendor
 /codegen/data.json
 /composer.lock
+/codegen/apidoc.html
