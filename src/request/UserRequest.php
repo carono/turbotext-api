@@ -16,7 +16,8 @@ class UserRequest extends \carono\turbotext\RequestAbstract
 	public function getUser($user_id)
 	{
 		$params = [
-			'action' => 'get_user'
+			'action' => 'get_user',
+			'user_id' => $user_id
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\UserResponse');
 	}
@@ -43,7 +44,8 @@ class UserRequest extends \carono\turbotext\RequestAbstract
 	public function getList($list_id)
 	{
 		$params = [
-			'action' => 'get_list'
+			'action' => 'get_list',
+			'list_id' => $list_id
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\UsersResponse');
 	}
@@ -58,7 +60,9 @@ class UserRequest extends \carono\turbotext\RequestAbstract
 	public function addToList($list_id, $user_id)
 	{
 		$params = [
-			'action' => 'add_to_list'
+			'action' => 'add_to_list',
+			'list_id' => $list_id,
+			'user_id' => $user_id
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}
@@ -73,7 +77,9 @@ class UserRequest extends \carono\turbotext\RequestAbstract
 	public function removeFromList($list_id, $user_id)
 	{
 		$params = [
-			'action' => 'remove_from_list'
+			'action' => 'remove_from_list',
+			'list_id' => $list_id,
+			'user_id' => $user_id
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}
@@ -87,7 +93,8 @@ class UserRequest extends \carono\turbotext\RequestAbstract
 	public function addToBlackList($user_id)
 	{
 		$params = [
-			'action' => 'add_to_black_list'
+			'action' => 'add_to_black_list',
+			'user_id' => $user_id
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}
@@ -101,7 +108,8 @@ class UserRequest extends \carono\turbotext\RequestAbstract
 	public function removeFromBlackList($user_id)
 	{
 		$params = [
-			'action' => 'remove_from_black_list'
+			'action' => 'remove_from_black_list',
+			'user_id' => $user_id
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}

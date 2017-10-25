@@ -43,8 +43,7 @@ class RequestAbstract extends ClassGenerator
             $params = [];
             $params['action'] = $methodData['name'];
 
-            $paramsStr = self::arrayAsPhpVar($params);
-            $method->addBody("\$params = $paramsStr;");
+
             if (count($methodData['params']) > 4) {
                 $config = new ConfigAbstract();
                 $config->renderToFile($methodData);
@@ -57,6 +56,8 @@ foreach ((\$config instanceof \carono\\turbotext\ConfigAbstract ? \$config->toAr
     \$params[\$key] = \$value;
 }
 PHP;
+                $paramsStr = self::arrayAsPhpVar($params);
+                $method->addBody("\$params = $paramsStr;");
                 $method->addBody($body);
             } else {
                 foreach ($methodData['params'] as $param) {
@@ -69,6 +70,8 @@ PHP;
                         $method->addParameter($param['name'], null);
                     }
                 }
+                $paramsStr = self::arrayAsPhpVar($params);
+                $method->addBody("\$params = $paramsStr;");
             }
             $response = new ResponseAbstract();
             if (isset($methodData['returns'][0]['result'])) {
