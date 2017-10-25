@@ -1,6 +1,12 @@
 {
   "name": "carono/turbotext-api",
-  "description": "",
+  "description": "Unofficial client of the site www.turbotext.ru",
+  "license": "MIT",
+  "keywords": [
+    "turbotext",
+    "api",
+    "client"
+  ],
   "type": "library",
   "authors": [
     {
