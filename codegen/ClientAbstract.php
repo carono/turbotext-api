@@ -42,7 +42,6 @@ PHP;
             $method->addComment("");
             $method->addComment("@return $className");
         }
-        file_put_contents('data.json', json_encode($this->params));
         return false;
     }
 }
