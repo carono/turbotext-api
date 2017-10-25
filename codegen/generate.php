@@ -5,76 +5,11 @@ require 'ClientAbstract.php';
 require 'RequestAbstract.php';
 require 'ResponseAbstract.php';
 require 'ConfigAbstract.php';
+require 'func.php';
 
 use GuzzleHttp\Client;
 use carono\turbotext\codegen\ClientAbstract;
 
-function formClassName($str)
-{
-    $clear = [
-        'get_',
-        'create_',
-        '_array'
-    ];
-    foreach ($clear as $item) {
-        $str = str_ireplace($item, '', $str);
-    }
-    $arr = array_filter(explode('_', $str));
-    $arr = array_map('ucfirst', $arr);
-    return join('', $arr);
-}
-
-function formParamType($str)
-{
-    if ($str == 'text') {
-        return 'string';
-    }
-    return $str;
-}
-
-function parseParams($str)
-{
-    if (preg_match('/^(\w+)\s+\((\w+)\)\s+-\s+(.+)/uis', $str, $m)) {
-        return [
-            'name' => $m[1],
-            'type' => $m[2],
-            'description' => $m[3],
-            'required' => mb_strpos($m[3], 'Необязательный', 0, 'utf-8') === false
-        ];
-    } else {
-        return [];
-    }
-}
-
-function parseReturns($tdHtml)
-{
-    $uls = pq($tdHtml)->find('ul');
-    $returns = [];
-    if ($uls->count() == 1 && strpos($tdHtml, 'Каждый элемент') !== false) {
-        if (preg_match('/<td>(.)+<ul>/s', $tdHtml, $m)) {
-            $ul = "<ul><li>" . trim(strip_tags($m[0])) . "</li></ul>";
-            $uls = pq("<td>$ul{$uls->eq(0)->htmlOuter()}</td>")->find('ul');
-        }
-    }
-    if ($uls->count() == 2) {
-        $returnParam = parseParams($uls->eq(0)->text());
-        $result = [];
-        foreach ($uls->eq(1)->find('li') as $param) {
-            if ($parsedParam = parseParams(pq($param)->text())) {
-                $result[] = $parsedParam;
-            }
-        }
-        $returnParam['result'] = $result;
-        $returns[] = $returnParam;
-    } else {
-        foreach ($uls->eq(0)->find('li') as $param) {
-            if ($parsedParam = parseParams(pq($param)->text())) {
-                $returns[] = $parsedParam;
-            }
-        }
-    }
-    return $returns;
-}
 
 $sections = [
     'api1' => 'order',
@@ -121,6 +56,7 @@ foreach ($desc = $query->find('.api_descr') as $desc) {
     }
     $data[] = $item;
 };
+file_put_contents('data.json', json_encode($data));
 
 $abstractClient = new ClientAbstract();
 $abstractClient->renderToFile($data);

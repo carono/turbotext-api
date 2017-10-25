@@ -6,44 +6,49 @@ use carono\codegen\ClassGenerator;
 
 class RequestAbstract extends ClassGenerator
 {
+    /**
+     * @return string
+     */
     protected function formExtends()
     {
         return 'carono\turbotext\RequestAbstract';
     }
 
+    /**
+     * @return string
+     */
     protected function formClassName()
     {
         return ucfirst($this->params['name']) . 'Request';
     }
 
+    /**
+     * @return string
+     */
     protected function formClassNamespace()
     {
         return 'carono\turbotext\request';
     }
 
+    /**
+     * @return string
+     */
     protected function formOutputPath()
     {
         return dirname(__DIR__) . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'request' . DIRECTORY_SEPARATOR . $this->formClassName() . '.php';
     }
 
-    protected static function formMethodName($str)
-    {
-        $arr = array_filter(explode('_', $str));
-        $arr = array_map('ucfirst', $arr);
-        $arr[0] = lcfirst($arr[0]);
-        return join('', $arr);
-    }
-
+    /**
+     * @return bool
+     */
     public function methods()
     {
         foreach ($this->params['methods'] as $methodData) {
-            $methodName = self::formMethodName($methodData['name']);
+            $methodName = formMethodName($methodData['name']);
             $method = $this->phpClass->addMethod($methodName);
             $method->addComment(trim($methodData['description']));
             $params = [];
             $params['action'] = $methodData['name'];
-
-
             if (count($methodData['params']) > 4) {
                 $config = new ConfigAbstract();
                 $config->renderToFile($methodData);
@@ -91,7 +96,7 @@ PHP;
         return false;
     }
 
-    protected function arrayAsPhpVar($array)
+    protected static function arrayAsPhpVar($array)
     {
         $export = [];
         foreach ($array as $key => $value) {

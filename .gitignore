@@ -1,2 +1,4 @@
 .idea
 /vendor
+/codegen/data.json
+/composer.lock
