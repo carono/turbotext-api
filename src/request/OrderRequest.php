@@ -8,6 +8,10 @@ namespace carono\turbotext\request;
 
 class OrderRequest extends \carono\turbotext\RequestAbstract
 {
+	/**
+	 * Возвращает все папки пользователя
+	 * @return \carono\turbotext\response\FoldersResponse
+	 */
 	public function getFolders()
 	{
 		$params = [
@@ -17,6 +21,10 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 	}
 
 
+	/**
+	 * Возвращает количество доступных средств
+	 * @return \carono\turbotext\response\BalanceResponse
+	 */
 	public function getBalance()
 	{
 		$params = [
@@ -27,7 +35,9 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 
 
 	/**
+	 * Создаёт новую папку
 	 * @param string $name имя новой папки
+	 * @return \carono\turbotext\response\FolderResponse
 	 */
 	public function createFolder($name)
 	{
@@ -40,7 +50,10 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 
 
 	/**
+	 * Возвращает все заказы пользователя в папке folder_id. Если folder_id не указано, возвращает все
+	 *                     заказы.
 	 * @param string $folder_id уникальный идентификатор папки (необязательный параметр)
+	 * @return \carono\turbotext\response\OrdersResponse
 	 */
 	public function getOrders($folder_id)
 	{
@@ -52,6 +65,10 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 	}
 
 
+	/**
+	 * Создаёт новый заказ
+	 * @return \carono\turbotext\response\OrderResponse
+	 */
 	public function createOrder()
 	{
 		$params = [
@@ -62,7 +79,9 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 
 
 	/**
+	 * Получает информацию о заказе order_id
 	 * @param int $order_id уникальный идентификатор (номер) заказа.
+	 * @return \carono\turbotext\response\OrderResponse
 	 */
 	public function getOrder($order_id)
 	{
@@ -75,8 +94,9 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 
 
 	/**
+	 * Удаляет заказ order_id
 	 * @param int $order_id уникальный идентификатор (номер) заказа.
-	 * @return void
+	 * @return \carono\turbotext\Response
 	 */
 	public function deleteOrder($order_id)
 	{
@@ -89,9 +109,10 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 
 
 	/**
+	 * Отправить заказ на доработку
 	 * @param int $order_id уникальный идентификатор (номер) заказа
 	 * @param string $text причина, по которой вы отправляете заказ на доработку
-	 * @return void
+	 * @return \carono\turbotext\Response
 	 */
 	public function rejectOrder($order_id, $text)
 	{
@@ -105,9 +126,10 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 
 
 	/**
+	 * Отклонить заказ
 	 * @param int $order_id уникальный идентификатор (номер) заказа
 	 * @param string $text причина, по которой вы отказываетесь от заказа
-	 * @return void
+	 * @return \carono\turbotext\Response
 	 */
 	public function declineOrder($order_id, $text)
 	{
@@ -121,9 +143,10 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 
 
 	/**
+	 * Принять заказ
 	 * @param int $order_id уникальный идентификатор (номер) заказа
 	 * @param string $text комментарий (необязательно)
-	 * @return void
+	 * @return \carono\turbotext\Response
 	 */
 	public function acceptOrder($order_id, $text)
 	{
@@ -137,10 +160,11 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 
 
 	/**
+	 * Переместить заказ в определённую папку
 	 * @param int $order_id уникальный идентификатор (номер) заказа
 	 * @param int $folder_id уникальный идентификатор папки, в которую нужно переместить заказ.
 	 *
-	 * @return void
+	 * @return \carono\turbotext\Response
 	 */
 	public function moveOrder($order_id, $folder_id)
 	{
@@ -154,7 +178,9 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 
 
 	/**
+	 * Просмотереть общение по заказу
 	 * @param int $order_id уникальный идентификатор (номер) заказа
+	 * @return \carono\turbotext\response\MessagesResponse
 	 */
 	public function getConversation($order_id)
 	{

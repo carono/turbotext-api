@@ -9,7 +9,9 @@ namespace carono\turbotext\request;
 class UserRequest extends \carono\turbotext\RequestAbstract
 {
 	/**
+	 * Возвращает информацию о пользователе
 	 * @param int $user_id уникальный идентификатор пользователя
+	 * @return \carono\turbotext\response\UserResponse
 	 */
 	public function getUser($user_id)
 	{
@@ -21,6 +23,10 @@ class UserRequest extends \carono\turbotext\RequestAbstract
 	}
 
 
+	/**
+	 * Возвращает все белые списки пользователя
+	 * @return \carono\turbotext\response\ListsResponse
+	 */
 	public function getLists()
 	{
 		$params = [
@@ -31,7 +37,9 @@ class UserRequest extends \carono\turbotext\RequestAbstract
 
 
 	/**
+	 * Возвращает всех исполнителей, которые присутствуют в определённом белом списке
 	 * @param int $list_id уникальный идентификатор списка
+	 * @return \carono\turbotext\response\UsersResponse
 	 */
 	public function getList($list_id)
 	{
@@ -44,9 +52,10 @@ class UserRequest extends \carono\turbotext\RequestAbstract
 
 
 	/**
+	 * Добавляет пользователя в список
 	 * @param int $list_id уникальный идентификатор списка, в который нужно добавить пользователя
 	 * @param int $user_id уникальный идентификатор пользователя
-	 * @return void
+	 * @return \carono\turbotext\Response
 	 */
 	public function addToList($list_id, $user_id)
 	{
@@ -60,9 +69,10 @@ class UserRequest extends \carono\turbotext\RequestAbstract
 
 
 	/**
+	 * Удаляет пользователя из списка
 	 * @param int $list_id уникальный идентификатор списка, из которого нужно удалить пользователя
 	 * @param int $user_id уникальный идентификатор пользователя
-	 * @return void
+	 * @return \carono\turbotext\Response
 	 */
 	public function removeFromList($list_id, $user_id)
 	{
@@ -76,8 +86,9 @@ class UserRequest extends \carono\turbotext\RequestAbstract
 
 
 	/**
+	 * Добавляет пользователя в черный список
 	 * @param int $user_id уникальный идентификатор пользователя
-	 * @return void
+	 * @return \carono\turbotext\Response
 	 */
 	public function addToBlackList($user_id)
 	{
@@ -90,8 +101,9 @@ class UserRequest extends \carono\turbotext\RequestAbstract
 
 
 	/**
+	 * Удаляет пользователя из черного списка
 	 * @param int $user_id уникальный идентификатор пользователя
-	 * @return void
+	 * @return \carono\turbotext\Response
 	 */
 	public function removeFromBlackList($user_id)
 	{

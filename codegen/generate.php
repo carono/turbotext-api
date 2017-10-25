@@ -3,9 +3,18 @@
 require '../vendor/autoload.php';
 require 'ClientAbstract.php';
 require 'RequestAbstract.php';
+require 'ResponseAbstract.php';
 
 use GuzzleHttp\Client;
 use carono\turbotext\codegen\ClientAbstract;
+
+function formParamType($str)
+{
+    if ($str == 'text') {
+        return 'string';
+    }
+    return $str;
+}
 
 function parseParams($str)
 {

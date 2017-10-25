@@ -34,19 +34,12 @@ class RequestAbstract extends ClassGenerator
         return join('', $arr);
     }
 
-    protected static function formParamType($str)
-    {
-        if ($str == 'text') {
-            return 'string';
-        }
-        return $str;
-    }
-
     public function methods()
     {
         foreach ($this->params['methods'] as $methodData) {
             $methodName = self::formMethodName($methodData['name']);
             $method = $this->phpClass->addMethod($methodName);
+            $method->addComment(trim($methodData['description']));
             $params = [];
             $params['action'] = $methodData['name'];
 
@@ -54,7 +47,7 @@ class RequestAbstract extends ClassGenerator
 
             } else {
                 foreach ($methodData['params'] as $param) {
-                    $type = self::formParamType($param['type']);
+                    $type = formParamType($param['type']);
                     $method->addComment("@param {$type} \${$param['name']} {$param['description']}");
                     $params[$param['name']] = '$' . $param['name'];
                     if ($param['required']) {
@@ -64,17 +57,27 @@ class RequestAbstract extends ClassGenerator
                     }
                 }
             }
-            if ($methodData['returns']) {
-
+            $response = new ResponseAbstract();
+            if (isset($methodData['returns'][0]['result'])) {
+                $response->renderToFile($methodData['returns'][0]);
+                $className = $response->formClassNamespace() . '\\' . $response->formClassName();
+            } elseif ($methodData['returns']) {
+                $methodData['returns']['name'] = $methodData['name'];
+                $response->renderToFile($methodData['returns']);
+                $className = $response->formClassNamespace() . '\\' . $response->formClassName();
             } else {
-                $method->addComment('@return void');
+                $className = '';
+            }
+            if ($className) {
+                $method->addComment("@return \\$className");
+            } else {
+                $method->addComment('@return \carono\turbotext\Response');
             }
             $paramsStr = self::arrayAsPhpVar($params);
             $body = <<<PHP
 \$params = $paramsStr;            
 return \$this->getClient()->getContent('api', \$params);
 PHP;
-
             $method->addBody($body);
         }
         return false;

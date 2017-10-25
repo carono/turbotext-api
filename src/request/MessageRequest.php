@@ -9,7 +9,8 @@ namespace carono\turbotext\request;
 class MessageRequest extends \carono\turbotext\RequestAbstract
 {
 	/**
-	 * @return void
+	 * Получить список пользователей, кому вы отправляли личные сообщения
+	 * @return \carono\turbotext\Response
 	 */
 	public function pmGetSent()
 	{
@@ -21,7 +22,8 @@ class MessageRequest extends \carono\turbotext\RequestAbstract
 
 
 	/**
-	 * @return void
+	 * Получить список пользователей, которые вам отправляли личные сообщения
+	 * @return \carono\turbotext\Response
 	 */
 	public function pmGetReceived()
 	{
@@ -33,9 +35,10 @@ class MessageRequest extends \carono\turbotext\RequestAbstract
 
 
 	/**
+	 * Отправить личное сообщение
 	 * @param int $user_id ID пользователя, которому нужно отправить сообщение
 	 * @param string $message текст сообщения
-	 * @return void
+	 * @return \carono\turbotext\Response
 	 */
 	public function pmSend($user_id, $message)
 	{
@@ -49,7 +52,9 @@ class MessageRequest extends \carono\turbotext\RequestAbstract
 
 
 	/**
+	 * Получить переписку с определённым пользователем
 	 * @param int $user_id ID пользователя, переписку с которым нужно получить
+	 * @return \carono\turbotext\response\MessagesResponse
 	 */
 	public function pmGetConversation($user_id)
 	{
