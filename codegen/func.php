@@ -83,31 +83,26 @@ function parseParams($str)
 function parseReturns($tdHtml)
 {
     $uls = pq($tdHtml)->find('ul');
-    $returns = [];
     if ($uls->count() == 1 && strpos($tdHtml, 'Каждый элемент') !== false) {
         if (preg_match('/<td>(.)+<ul>/s', $tdHtml, $m)) {
             $ul = "<ul><li>" . trim(strip_tags($m[0])) . "</li></ul>";
             $uls = pq("<td>$ul{$uls->eq(0)->htmlOuter()}</td>")->find('ul');
         }
     }
-    if ($uls->count() == 2) {
-        $returnParam = parseParams($uls->eq(0)->text());
-        $result = [];
-        foreach ($uls->eq(1)->find('li') as $param) {
-            if ($parsedParam = parseParams(pq($param)->text())) {
-                $result[] = $parsedParam;
-            }
-        }
-        $returnParam['result'] = $result;
-        $returns[] = $returnParam;
-    } else {
-        foreach ($uls->eq(0)->find('li') as $param) {
-            if ($parsedParam = parseParams(pq($param)->text())) {
-                $returns[] = $parsedParam;
-            }
+    $count = $uls->count();
+    $parsing = [];
+    foreach ($uls->eq($count == 2 ? 1 : 0)->find('li') as $param) {
+        if ($parsedParam = parseParams(pq($param)->text())) {
+            $parsing[] = $parsedParam;
         }
     }
-    return $returns;
+    if ($count == 2) {
+        $returnParam = parseParams($uls->eq(0)->text());
+        $returnParam['result'] = $parsing;
+        return [$returnParam];
+    } else {
+        return $parsing;
+    }
 }
 
 function asTable($array)
