@@ -52,8 +52,16 @@ function formClassName($str, $clear = ['get_', '_array'])
 
 function formParamType($str)
 {
-    if ($str == 'text') {
-        return 'string';
+    switch ($str) {
+        case 'text':
+            return 'string';
+            break;
+        case 'date':
+            return 'string Y-m-d';
+            break;
+        case 'datetime':
+            return 'string Y-m-d H:i:s';
+            break;
     }
     return $str;
 }

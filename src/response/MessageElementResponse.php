@@ -25,7 +25,7 @@ class MessageElementResponse extends \carono\turbotext\ArrayObject
 	/**
 	 * дата отправки
 	 *
-	 * @var date
+	 * @var string Y-m-d
 	 */
 	public $date;
 

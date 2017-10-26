@@ -48,14 +48,14 @@ class OrderResponse extends \carono\turbotext\ResponseAbstract
 	/**
 	 * дата публикации заказа
 	 *
-	 * @var datetime
+	 * @var string Y-m-d H:i:s
 	 */
 	public $date_add;
 
 	/**
 	 * дата последнего обновления заказа
 	 *
-	 * @var datetime
+	 * @var string Y-m-d H:i:s
 	 */
 	public $date_upd;
 
