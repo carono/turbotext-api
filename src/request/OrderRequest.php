@@ -40,7 +40,7 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 	 * Создаёт новую папку
 	 *
 	 * @param string $name имя новой папки
-	 * @return \carono\turbotext\response\FolderResponse|string|\stdClass|\SimpleXMLElement
+	 * @return \carono\turbotext\response\CreateFolderResponse|string|\stdClass|\SimpleXMLElement
 	 */
 	public function createFolder($name)
 	{
@@ -48,7 +48,7 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 			'action' => 'create_folder',
 			'name' => $name
 		];
-		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\FolderResponse');
+		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\CreateFolderResponse');
 	}
 
 
@@ -72,7 +72,7 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 	 * Создаёт новый заказ
 	 *
 	 * @param \carono\turbotext\config\OrderConfig|array $config
-	 * @return \carono\turbotext\response\OrderResponse|string|\stdClass|\SimpleXMLElement
+	 * @return \carono\turbotext\response\CreateOrderResponse|string|\stdClass|\SimpleXMLElement
 	 */
 	public function createOrder($config)
 	{
@@ -82,7 +82,7 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 		foreach (($config instanceof \carono\turbotext\ConfigAbstract ? $config->toArray() : $config) as $key => $value) {
 		    $params[$key] = $value;
 		}
-		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\OrderResponse');
+		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\CreateOrderResponse');
 	}
 
 

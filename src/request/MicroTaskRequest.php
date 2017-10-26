@@ -26,7 +26,7 @@ class MicroTaskRequest extends \carono\turbotext\RequestAbstract
 	 * Создаёт новую папку для микрозадач
 	 *
 	 * @param string $name имя новой папки
-	 * @return \carono\turbotext\response\MicrotasksFolderResponse|string|\stdClass|\SimpleXMLElement
+	 * @return \carono\turbotext\response\CreateMicrotasksFolderResponse|string|\stdClass|\SimpleXMLElement
 	 */
 	public function createMicrotasksFolder($name)
 	{
@@ -34,7 +34,7 @@ class MicroTaskRequest extends \carono\turbotext\RequestAbstract
 			'action' => 'create_microtasks_folder',
 			'name' => $name
 		];
-		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\MicrotasksFolderResponse');
+		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\CreateMicrotasksFolderResponse');
 	}
 
 
@@ -58,7 +58,7 @@ class MicroTaskRequest extends \carono\turbotext\RequestAbstract
 	 * Создаёт новую микрозадачу
 	 *
 	 * @param \carono\turbotext\config\MicrotaskConfig|array $config
-	 * @return \carono\turbotext\response\MicrotaskResponse|string|\stdClass|\SimpleXMLElement
+	 * @return \carono\turbotext\response\CreateMicrotaskResponse|string|\stdClass|\SimpleXMLElement
 	 */
 	public function createMicrotask($config)
 	{
@@ -68,7 +68,7 @@ class MicroTaskRequest extends \carono\turbotext\RequestAbstract
 		foreach (($config instanceof \carono\turbotext\ConfigAbstract ? $config->toArray() : $config) as $key => $value) {
 		    $params[$key] = $value;
 		}
-		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\MicrotaskResponse');
+		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\CreateMicrotaskResponse');
 	}
 
 

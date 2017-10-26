@@ -14,7 +14,7 @@ class ConfigAbstract extends ClassGenerator
 
     protected function formClassName()
     {
-        return formClassName($this->params['name']) . 'Config';
+        return formClassName($this->params['name'], ['get_', '_array', 'create_']) . 'Config';
     }
 
     protected function formClassNamespace()

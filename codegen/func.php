@@ -1,4 +1,13 @@
 <?php
+function clearFolder($folder)
+{
+    $files = glob(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . '*');
+    foreach ($files as $file) {
+        if (is_file($file)) {
+            @unlink($file);
+        }
+    }
+}
 
 function stripAndWordWrap($str)
 {
@@ -31,13 +40,8 @@ function formMethodName($str)
     return join('', $arr);
 }
 
-function formClassName($str)
+function formClassName($str, $clear = ['get_', '_array'])
 {
-    $clear = [
-        'get_',
-        'create_',
-        '_array'
-    ];
     foreach ($clear as $item) {
         $str = str_ireplace($item, '', $str);
     }

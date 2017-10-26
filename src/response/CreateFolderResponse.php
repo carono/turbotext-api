@@ -6,7 +6,7 @@
 
 namespace carono\turbotext\response;
 
-class FolderResponse extends \carono\turbotext\ResponseAbstract
+class CreateFolderResponse extends \carono\turbotext\ResponseAbstract
 {
 	/**
 	 * уникальный идентификатор созданной папки

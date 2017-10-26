@@ -10,6 +10,9 @@ require 'func.php';
 use GuzzleHttp\Client;
 use carono\turbotext\codegen\ClientAbstract;
 
+clearFolder('config');
+clearFolder('request');
+clearFolder('response');
 
 $sections = [
     'api1' => 'order',
