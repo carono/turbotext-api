@@ -10,6 +10,7 @@ class MicroTaskRequest extends \carono\turbotext\RequestAbstract
 {
 	/**
 	 * Возвращает все папки для микрозадач
+	 *
 	 * @return \carono\turbotext\response\FoldersResponse|string|\stdClass|\SimpleXMLElement
 	 */
 	public function getMicrotasksFolders()
@@ -23,6 +24,7 @@ class MicroTaskRequest extends \carono\turbotext\RequestAbstract
 
 	/**
 	 * Создаёт новую папку для микрозадач
+	 *
 	 * @param string $name имя новой папки
 	 * @return \carono\turbotext\response\MicrotasksFolderResponse|string|\stdClass|\SimpleXMLElement
 	 */
@@ -37,8 +39,8 @@ class MicroTaskRequest extends \carono\turbotext\RequestAbstract
 
 
 	/**
-	 * Возвращает все микрозадачи в папке folder_id. Если folder_id не указано, возвращает все
-	 *                     микрозадачи.
+	 * Возвращает все микрозадачи в папке folder_id. Если folder_id не указано, возвращает все микрозадачи.
+	 *
 	 * @param int $folder_id уникальный идентификатор папки (необязательный параметр)
 	 * @return \carono\turbotext\response\OrdersResponse|string|\stdClass|\SimpleXMLElement
 	 */
@@ -54,6 +56,7 @@ class MicroTaskRequest extends \carono\turbotext\RequestAbstract
 
 	/**
 	 * Создаёт новую микрозадачу
+	 *
 	 * @param \carono\turbotext\config\MicrotaskConfig|array $config
 	 * @return \carono\turbotext\response\MicrotaskResponse|string|\stdClass|\SimpleXMLElement
 	 */
@@ -71,7 +74,8 @@ class MicroTaskRequest extends \carono\turbotext\RequestAbstract
 
 	/**
 	 * Возвращает все отчёты о выполненных заданиях, ожидающие проверки, для микрозадачи microtask_id. Если
-	 *                     microtask_id не указано, возвращает все отчёты, ожидающие проверки.
+	 * microtask_id не указано, возвращает все отчёты, ожидающие проверки.
+	 *
 	 * @param int $microtask_id уникальный идентификатор микрозадачи (необязательный параметр)
 	 * @return \carono\turbotext\response\TasksResponse|string|\stdClass|\SimpleXMLElement
 	 */
@@ -87,11 +91,11 @@ class MicroTaskRequest extends \carono\turbotext\RequestAbstract
 
 	/**
 	 * Отправить задание на доработку или отказаться от него
+	 *
 	 * @param int $task_id уникальный идентификатор (номер) отчёта по задаче
 	 * @param string $text причина, по которой вы отправляете задачу на доработку или отклоняете
-	 * @param int $decline в случае, если параметр decline равен 1, то задание будет отклонено без
-	 *                             возможности доработки. Необязательный параметр, значение по умолчанию - 0.
-	 *
+	 * @param int $decline в случае, если параметр decline равен 1, то задание будет отклонено без возможности доработки.
+	 * Необязательный параметр, значение по умолчанию - 0.
 	 * @return \carono\turbotext\Response|string|\stdClass|\SimpleXMLElement
 	 */
 	public function microtasksRejectTask($task_id, $text, $decline = null)
@@ -108,6 +112,7 @@ class MicroTaskRequest extends \carono\turbotext\RequestAbstract
 
 	/**
 	 * Принять и оплатить задачу
+	 *
 	 * @param int $task_id уникальный идентификатор (номер) отчёта по задаче
 	 * @return \carono\turbotext\Response|string|\stdClass|\SimpleXMLElement
 	 */
@@ -123,6 +128,7 @@ class MicroTaskRequest extends \carono\turbotext\RequestAbstract
 
 	/**
 	 * Временно остановть выполнение микрозадачи
+	 *
 	 * @param int $task_id уникальный идентификатор (номер) микрозадачи
 	 * @return \carono\turbotext\Response|string|\stdClass|\SimpleXMLElement
 	 */
@@ -138,6 +144,7 @@ class MicroTaskRequest extends \carono\turbotext\RequestAbstract
 
 	/**
 	 * Включить выполнение ранее остановленной микрозадачи
+	 *
 	 * @param int $task_id уникальный идентификатор (номер) отчёта по задаче
 	 * @return \carono\turbotext\Response|string|\stdClass|\SimpleXMLElement
 	 */

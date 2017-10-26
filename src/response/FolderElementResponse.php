@@ -10,12 +10,14 @@ class FolderElementResponse extends \carono\turbotext\ArrayObject
 {
 	/**
 	 * уникальный идентификатор папки
+	 *
 	 * @var int
 	 */
 	public $id;
 
 	/**
 	 * имя папки
+	 *
 	 * @var string
 	 */
 	public $name;

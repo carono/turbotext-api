@@ -10,6 +10,7 @@ class UserRequest extends \carono\turbotext\RequestAbstract
 {
 	/**
 	 * Возвращает информацию о пользователе
+	 *
 	 * @param int $user_id уникальный идентификатор пользователя
 	 * @return \carono\turbotext\response\UserResponse|string|\stdClass|\SimpleXMLElement
 	 */
@@ -25,6 +26,7 @@ class UserRequest extends \carono\turbotext\RequestAbstract
 
 	/**
 	 * Возвращает все белые списки пользователя
+	 *
 	 * @return \carono\turbotext\response\ListsResponse|string|\stdClass|\SimpleXMLElement
 	 */
 	public function getLists()
@@ -38,6 +40,7 @@ class UserRequest extends \carono\turbotext\RequestAbstract
 
 	/**
 	 * Возвращает всех исполнителей, которые присутствуют в определённом белом списке
+	 *
 	 * @param int $list_id уникальный идентификатор списка
 	 * @return \carono\turbotext\response\UsersResponse|string|\stdClass|\SimpleXMLElement
 	 */
@@ -53,6 +56,7 @@ class UserRequest extends \carono\turbotext\RequestAbstract
 
 	/**
 	 * Добавляет пользователя в список
+	 *
 	 * @param int $list_id уникальный идентификатор списка, в который нужно добавить пользователя
 	 * @param int $user_id уникальный идентификатор пользователя
 	 * @return \carono\turbotext\Response|string|\stdClass|\SimpleXMLElement
@@ -70,6 +74,7 @@ class UserRequest extends \carono\turbotext\RequestAbstract
 
 	/**
 	 * Удаляет пользователя из списка
+	 *
 	 * @param int $list_id уникальный идентификатор списка, из которого нужно удалить пользователя
 	 * @param int $user_id уникальный идентификатор пользователя
 	 * @return \carono\turbotext\Response|string|\stdClass|\SimpleXMLElement
@@ -87,6 +92,7 @@ class UserRequest extends \carono\turbotext\RequestAbstract
 
 	/**
 	 * Добавляет пользователя в черный список
+	 *
 	 * @param int $user_id уникальный идентификатор пользователя
 	 * @return \carono\turbotext\Response|string|\stdClass|\SimpleXMLElement
 	 */
@@ -102,6 +108,7 @@ class UserRequest extends \carono\turbotext\RequestAbstract
 
 	/**
 	 * Удаляет пользователя из черного списка
+	 *
 	 * @param int $user_id уникальный идентификатор пользователя
 	 * @return \carono\turbotext\Response|string|\stdClass|\SimpleXMLElement
 	 */

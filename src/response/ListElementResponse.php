@@ -10,12 +10,14 @@ class ListElementResponse extends \carono\turbotext\ArrayObject
 {
 	/**
 	 * уникальный идентификатор списка
+	 *
 	 * @var int
 	 */
 	public $id;
 
 	/**
 	 * имя списка
+	 *
 	 * @var string
 	 */
 	public $name;

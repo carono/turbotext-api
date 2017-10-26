@@ -56,7 +56,7 @@ class ResponseAbstract extends ClassGenerator
             $properties[$this->params['name']] = [
                 'value' => [],
                 'comment' => [
-                    $this->params['description'],
+                    stripAndWordWrap($this->params['description']),
                     "@var {$varClass}[]"
                 ]
             ];
@@ -67,7 +67,7 @@ class ResponseAbstract extends ClassGenerator
                 }
                 $properties[$param['name']] = [
                     'comment' => [
-                        $param['description'],
+                        stripAndWordWrap($param['description']),
                         '@var ' . formParamType($param['type'])
                     ]
                 ];

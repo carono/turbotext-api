@@ -10,6 +10,7 @@ class UserElementResponse extends \carono\turbotext\ArrayObject
 {
 	/**
 	 * уникальный идентификатор пользователя
+	 *
 	 * @var int
 	 */
 	public $user_id;

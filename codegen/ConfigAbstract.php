@@ -36,7 +36,7 @@ class ConfigAbstract extends ClassGenerator
             }
             $properties[$param['name']] = [
                 'comment' => [
-                    $param['description'],
+                    stripAndWordWrap(stripSpaces($param['description'])),
                     '@var ' . formParamType($param['type'])
                 ]
             ];

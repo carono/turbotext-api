@@ -46,7 +46,7 @@ class RequestAbstract extends ClassGenerator
         foreach ($this->params['methods'] as $methodData) {
             $methodName = formMethodName($methodData['name']);
             $method = $this->phpClass->addMethod($methodName);
-            $method->addComment(trim($methodData['description']));
+            $method->addComment(stripAndWordWrap($methodData['description']));
             $params = [];
             $params['action'] = $methodData['name'];
             if (count($methodData['params']) > 4) {
@@ -67,7 +67,8 @@ PHP;
             } else {
                 foreach ($methodData['params'] as $param) {
                     $type = formParamType($param['type']);
-                    $method->addComment("@param {$type} \${$param['name']} {$param['description']}");
+                    $description = trim(stripAndWordWrap($param['description']));
+                    $method->addComment("@param {$type} \${$param['name']} {$description}");
                     $params[$param['name']] = '$' . $param['name'];
                     if ($param['required']) {
                         $method->addParameter($param['name']);

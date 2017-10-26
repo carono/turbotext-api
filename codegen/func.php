@@ -1,14 +1,25 @@
 <?php
 
+function stripAndWordWrap($str)
+{
+    return wordwrap(stripSpaces($str), 180) . "\n";
+}
+
 function formParamLine($param)
 {
     return '**' . $param['name'] . "** ({$param['type']}) - " . stripLines($param['description']);
 }
 
+function stripSpaces($str)
+{
+    $str = preg_replace('/[\s]{2,}/', " ", $str);
+    return $str;
+}
+
 function stripLines($str)
 {
     $str = str_replace("\n", " ", $str);
-    $str = preg_replace('/[\s]{2,}/', ' ', $str);
+    $str = stripSpaces($str);
     return $str;
 }
 

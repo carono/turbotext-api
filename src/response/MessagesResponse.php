@@ -14,6 +14,7 @@ class MessagesResponse extends \carono\turbotext\ResponseAbstract
 
 	/**
 	 * массив, содержащий список сообщений. Каждый элемент массива содержит:
+	 *
 	 * @var MessageElementResponse[]
 	 */
 	public $messages_array = [];

@@ -10,13 +10,13 @@ class BalanceResponse extends \carono\turbotext\ResponseAbstract
 {
 	/**
 	 * количество денег на балансе
+	 *
 	 * @var float
 	 */
 	public $balance;
 
 	/**
-	 * количество замороженных средств для выполнения заказов и
-	 *                             микрозадач
+	 * количество замороженных средств для выполнения заказов и микрозадач
 	 *
 	 * @var float
 	 */
