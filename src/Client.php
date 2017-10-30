@@ -63,6 +63,9 @@ class Client extends ClientAbstract
                 $response->$key = $value;
             }
         }
+        if (isset($response->success)) {
+            $response->success = filter_var($response->success, FILTER_VALIDATE_BOOLEAN);
+        }
         return $response;
     }
 }
