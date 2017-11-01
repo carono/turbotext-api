@@ -42,12 +42,8 @@ foreach ($desc = $query->find('.api_descr') as $desc) {
         if (!$name = trim($tr->find('td')->eq(0)->text())) {
             continue;
         }
-        $params = [];
-        foreach ($tr->find('td')->eq(2)->find('li') as $param) {
-            if ($parsedParam = parseParams(pq($param)->text())) {
-                $params[] = $parsedParam;
-            }
-        }
+        $params = parseParamsFromQuery($tr->find('td')->eq(2)->find('li'));
+
         $returns = parseReturns($uls = $tr->find('td')->eq(3)->htmlOuter());
         $method = [
             'name' => $name,

@@ -1,4 +1,16 @@
 <?php
+
+function parseParamsFromQuery($query)
+{
+    $params = [];
+    foreach ($query as $param) {
+        if ($parsedParam = parseParams(pq($param)->text())) {
+            $params[] = $parsedParam;
+        }
+    }
+    return $params;
+}
+
 function clearFolder($folder)
 {
     $files = glob(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . '*');
@@ -90,12 +102,7 @@ function parseReturns($tdHtml)
         }
     }
     $count = $uls->count();
-    $parsing = [];
-    foreach ($uls->eq($count == 2 ? 1 : 0)->find('li') as $param) {
-        if ($parsedParam = parseParams(pq($param)->text())) {
-            $parsing[] = $parsedParam;
-        }
-    }
+    $parsing = parseParamsFromQuery($uls->eq($count == 2 ? 1 : 0)->find('li'));
     if ($count == 2) {
         $returnParam = parseParams($uls->eq(0)->text());
         $returnParam['result'] = $parsing;
