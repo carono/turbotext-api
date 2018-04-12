@@ -21,7 +21,7 @@
     }
   ],
   "require": {
-    "carono/rest-client": "^0.2.0"
+    "carono/rest-client": "@stable"
   },
   "autoload": {
     "psr-4": {
