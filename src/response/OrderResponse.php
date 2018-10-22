@@ -102,6 +102,13 @@ class OrderResponse extends \carono\turbotext\ResponseAbstract
 	public $text;
 
 	/**
+	 * количество символов в тексте статьи
+	 *
+	 * @var int
+	 */
+	public $symbol_count;
+
+	/**
 	 * теги
 	 *
 	 * @var string
@@ -128,6 +135,13 @@ class OrderResponse extends \carono\turbotext\ResponseAbstract
 	 * @var float
 	 */
 	public $unique;
+
+	/**
+	 * количество часов на выполнение заказа
+	 *
+	 * @var int
+	 */
+	public $order_time;
 
 
 }

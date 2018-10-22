@@ -6,7 +6,7 @@
 
 namespace carono\turbotext\config;
 
-class OrderConfig extends \carono\turbotext\ConfigAbstract
+class TranslateOrderConfig extends \carono\turbotext\ConfigAbstract
 {
 	/**
 	 * название заказа
@@ -16,25 +16,34 @@ class OrderConfig extends \carono\turbotext\ConfigAbstract
 	public $order_title;
 
 	/**
-	 * тип заказа (1 - копирайтинг, 2 - рерайтинг)
+	 * статья для перевода
+	 *
+	 * @var string
+	 */
+	public $order_original_text;
+
+	/**
+	 * язык оригинала: 1 - Русский 2 - Английский 3 - Украинский 4 - Французский 5 - Немецкий 6 - Испанский 7 -
+	 * Итальянский 8 - Китайский
 	 *
 	 * @var int
 	 */
-	public $order_type;
+	public $lang1;
 
 	/**
-	 * задание для копирайтера, описание заказа
+	 * язык на выходе 1 - Русский 2 - Английский 3 - Украинский 4 - Французский 5 - Немецкий 6 - Испанский 7 -
+	 * Итальянский 8 - Китайский
+	 *
+	 * @var string
+	 */
+	public $lang2;
+
+	/**
+	 * задание для переводчика, описание заказа
 	 *
 	 * @var string
 	 */
 	public $order_description;
-
-	/**
-	 * статья для рерайта, если вы заказываете рерайтинг
-	 *
-	 * @var string
-	 */
-	public $order_text;
 
 	/**
 	 * минимальное количество знаков, которое должно быть в тексте (от 300 до 98000)
@@ -51,42 +60,12 @@ class OrderConfig extends \carono\turbotext\ConfigAbstract
 	public $order_size_to;
 
 	/**
-	 * идентификатор папки, в которую нужно добавить заказ
-	 *
-	 * @var int
-	 */
-	public $folder_id;
-
-	/**
-	 * значение уникальности текста. Необязательный параметр
-	 *
-	 * @var string
-	 */
-	public $order_unique;
-
-	/**
 	 * количество часов за которое нужно выполнить заказ (от 2 до 96). Необязательный параметр, значение по
 	 * умолчанию - 10.
 	 *
 	 * @var int
 	 */
 	public $order_time;
-
-	/**
-	 * Нужна ли стоимость за весь заказ? 1 - да, 0 - стоимость за 1000 символов. Необязательный параметр,
-	 * значение по умолчанию - 0.
-	 *
-	 * @var int
-	 */
-	public $order_price_for_total;
-
-	/**
-	 * стоимость за 1000 знаков с пробелами (копирайтинг от 29, рерайтинг от 22), если order_price_for_total равен 1, то
-	 * необходимо указать стоимость за весь заказ
-	 *
-	 * @var int
-	 */
-	public $order_price;
 
 	/**
 	 * кто может выполнить заказ. 0 - любой исполнитель 1 - только исполнитель определённого уровня (нужно
@@ -112,19 +91,34 @@ class OrderConfig extends \carono\turbotext\ConfigAbstract
 	public $order_who_can_work_value;
 
 	/**
+	 * Нужна ли стоимость за весь заказ? 1 - да, 0 - стоимость за 1000 символов. Необязательный параметр,
+	 * значение по умолчанию - 0.
+	 *
+	 * @var int
+	 */
+	public $order_price_for_total;
+
+	/**
+	 * стоимость за 1000 знаков с пробелами (от 49), если order_price_for_total равен 1, то необходимо указать стоимость
+	 * за весь заказ
+	 *
+	 * @var int
+	 */
+	public $order_price;
+
+	/**
+	 * идентификатор папки, в которую нужно добавить заказ
+	 *
+	 * @var int
+	 */
+	public $folder_id;
+
+	/**
 	 * Нужен ли вам анонс? 1 - да, 0 - нет. Необязательный параметр, значение по умолчанию - 0
 	 *
 	 * @var int
 	 */
 	public $order_need_anons;
-
-	/**
-	 * Нужно ли проверить текст корректором? 1 - да, 0 - нет. Необязательный параметр, значение по умолчанию
-	 * - 0
-	 *
-	 * @var int
-	 */
-	public $order_need_corrector;
 
 	/**
 	 * Нужно ли проверить текст на уникальность? 1 - да, 0 - нет. Необязательный параметр, значение по
@@ -157,11 +151,11 @@ class OrderConfig extends \carono\turbotext\ConfigAbstract
 	public $time_to_check;
 
 	/**
-	 * ключевые слова (до 5000 символов). Необязательный параметр.
+	 * значение уникальности текста. Необязательный параметр
 	 *
 	 * @var string
 	 */
-	public $keywords;
+	public $order_unique;
 
 
 }

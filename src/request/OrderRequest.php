@@ -87,6 +87,24 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 
 
 	/**
+	 * Создаёт новый заказ на перевод
+	 *
+	 * @param \carono\turbotext\config\TranslateOrderConfig|array $config
+	 * @return \carono\turbotext\response\CreateTranslateOrderResponse|string|\stdClass|\SimpleXMLElement
+	 */
+	public function createTranslateOrder($config)
+	{
+		$params = [
+			'action' => 'create_translate_order'
+		];
+		foreach (($config instanceof \carono\turbotext\ConfigAbstract ? $config->toArray() : $config) as $key => $value) {
+		    $params[$key] = $value;
+		}
+		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\CreateTranslateOrderResponse');
+	}
+
+
+	/**
 	 * Получает информацию о заказе order_id
 	 *
 	 * @param int $order_id уникальный идентификатор (номер) заказа.
@@ -157,16 +175,15 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 	/**
 	 * Принять заказ
 	 *
-	 * @param int $order_id уникальный идентификатор (номер) заказа
-	 * @param string $text комментарий (необязательно)
+	 * @param int $rating оценка для заказа: 5 - Отлично 4 - Неплохо 3 - Средненько 2 - Плохо 1 - Никуда не годится Параметр
+	 * необязательный. Значение по умолчанию - 0.
 	 * @return \carono\turbotext\Response|string|\stdClass|\SimpleXMLElement
 	 */
-	public function acceptOrder($order_id, $text)
+	public function acceptOrder($rating)
 	{
 		$params = [
 			'action' => 'accept_order',
-			'order_id' => $order_id,
-			'text' => $text
+			'rating' => $rating
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}
@@ -203,5 +220,51 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 			'order_id' => $order_id
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\response\MessagesResponse');
+	}
+
+
+	/**
+	 * Открепить заказ от просрочившего исполнителя
+	 *
+	 * @return \carono\turbotext\Response|string|\stdClass|\SimpleXMLElement
+	 */
+	public function unassignAuthor()
+	{
+		$params = [
+			'action' => 'unassign_author'
+		];
+		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
+	}
+
+
+	/**
+	 * Продлить время заказа
+	 *
+	 * @return \carono\turbotext\Response|string|\stdClass|\SimpleXMLElement
+	 */
+	public function extendTimeOrder()
+	{
+		$params = [
+			'action' => 'extend_time_order'
+		];
+		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
+	}
+
+
+	/**
+	 * Редактировать заказ
+	 *
+	 * @param \carono\turbotext\config\EditOrderConfig|array $config
+	 * @return \carono\turbotext\Response|string|\stdClass|\SimpleXMLElement
+	 */
+	public function editOrder($config)
+	{
+		$params = [
+			'action' => 'edit_order'
+		];
+		foreach (($config instanceof \carono\turbotext\ConfigAbstract ? $config->toArray() : $config) as $key => $value) {
+		    $params[$key] = $value;
+		}
+		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}
 }

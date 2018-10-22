@@ -127,7 +127,7 @@ class MicroTaskRequest extends \carono\turbotext\RequestAbstract
 
 
 	/**
-	 * Временно остановть выполнение микрозадачи
+	 * Временно остановить выполнение микрозадачи
 	 *
 	 * @param int $task_id уникальный идентификатор (номер) микрозадачи
 	 * @return \carono\turbotext\Response|string|\stdClass|\SimpleXMLElement

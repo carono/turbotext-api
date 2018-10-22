@@ -15,5 +15,12 @@ class UserElementResponse extends \carono\turbotext\ArrayObject
 	 */
 	public $user_id;
 
+	/**
+	 * ник пользователя
+	 *
+	 * @var string
+	 */
+	public $name;
+
 
 }
