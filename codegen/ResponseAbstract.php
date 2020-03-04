@@ -12,9 +12,9 @@ class ResponseAbstract extends ClassGenerator
     {
         if (strpos($this->formClassName(), 'ElementResponse')) {
             return 'carono\turbotext\ArrayObject';
-        } else {
-            return 'carono\turbotext\ResponseAbstract';
         }
+
+        return 'carono\turbotext\ResponseAbstract';
     }
 
     protected function formClassName()

@@ -39,7 +39,7 @@ return (new $className(\$this));
 PHP;
             $method->addBody($body);
             $method->addComment($section['description']);
-            $method->addComment("");
+            $method->addComment('');
             $method->addComment("@return $className");
         }
         return false;

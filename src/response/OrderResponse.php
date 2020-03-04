@@ -46,6 +46,13 @@ class OrderResponse extends \carono\turbotext\ResponseAbstract
 	public $description;
 
 	/**
+	 * оригинальный текст
+	 *
+	 * @var string
+	 */
+	public $original_text;
+
+	/**
 	 * дата публикации заказа
 	 *
 	 * @var string Y-m-d H:i:s

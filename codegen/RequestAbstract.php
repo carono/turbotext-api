@@ -81,7 +81,8 @@ PHP;
             }
             $response = new ResponseAbstract();
             if (isset($methodData['returns'][0]['result'])) {
-                $response->renderToFile($methodData['returns'][0]);
+                $returns = $methodData['returns'][0];
+                $response->renderToFile($returns);
                 $className = $response->formClassNamespace() . '\\' . $response->formClassName();
             } elseif ($methodData['returns']) {
                 $methodData['returns']['name'] = $methodData['name'];

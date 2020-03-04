@@ -80,16 +80,18 @@ function formParamType($str)
 
 function parseParams($str)
 {
-    if (preg_match('/^(\w+)\s+\((\w+)\)\s+-\s+(.+)/uis', $str, $m)) {
+
+    $str = trim($str, " \t\n\r\0\x0B");
+    if (preg_match('/^(\w+)\s?(\*?)\s+\((\w+)\)\s+-\s+(.+)/uis', $str, $m)) {
         return [
             'name' => $m[1],
-            'type' => $m[2],
-            'description' => $m[3],
-            'required' => mb_strpos($m[3], 'Необязательный', 0, 'utf-8') === false
+            'type' => $m[3],
+            'description' => $m[4],
+            'required' => $m[2] ? true : (mb_strpos($m[4], 'Необязательный', 0, 'utf-8') === false)
         ];
-    } else {
-        return [];
     }
+
+    return [];
 }
 
 function parseReturns($tdHtml)
@@ -107,9 +109,9 @@ function parseReturns($tdHtml)
         $returnParam = parseParams($uls->eq(0)->text());
         $returnParam['result'] = $parsing;
         return [$returnParam];
-    } else {
-        return $parsing;
     }
+
+    return $parsing;
 }
 
 function asTable($array)

@@ -175,14 +175,18 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 	/**
 	 * Принять заказ
 	 *
+	 * @param int $order_id уникальный идентификатор (номер) заказа
+	 * @param string $text комментарий (необязательно)
 	 * @param int $rating оценка для заказа: 5 - Отлично 4 - Неплохо 3 - Средненько 2 - Плохо 1 - Никуда не годится Параметр
 	 * необязательный. Значение по умолчанию - 0.
 	 * @return \carono\turbotext\Response|string|\stdClass|\SimpleXMLElement
 	 */
-	public function acceptOrder($rating)
+	public function acceptOrder($order_id, $text, $rating)
 	{
 		$params = [
 			'action' => 'accept_order',
+			'order_id' => $order_id,
+			'text' => $text,
 			'rating' => $rating
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
@@ -226,12 +230,14 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 	/**
 	 * Открепить заказ от просрочившего исполнителя
 	 *
+	 * @param int $order_id уникальный идентификатор (номер) заказа
 	 * @return \carono\turbotext\Response|string|\stdClass|\SimpleXMLElement
 	 */
-	public function unassignAuthor()
+	public function unassignAuthor($order_id)
 	{
 		$params = [
-			'action' => 'unassign_author'
+			'action' => 'unassign_author',
+			'order_id' => $order_id
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}
@@ -240,12 +246,16 @@ class OrderRequest extends \carono\turbotext\RequestAbstract
 	/**
 	 * Продлить время заказа
 	 *
+	 * @param int $order_id уникальный идентификатор (номер) заказа
+	 * @param int $order_hours сколько часов добавить (от 1 до 96 включительно)
 	 * @return \carono\turbotext\Response|string|\stdClass|\SimpleXMLElement
 	 */
-	public function extendTimeOrder()
+	public function extendTimeOrder($order_id, $order_hours)
 	{
 		$params = [
-			'action' => 'extend_time_order'
+			'action' => 'extend_time_order',
+			'order_id' => $order_id,
+			'order_hours' => $order_hours
 		];
 		return $this->getClient()->getContent('api', $params, 'carono\turbotext\Response');
 	}

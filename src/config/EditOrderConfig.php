@@ -9,6 +9,13 @@ namespace carono\turbotext\config;
 class EditOrderConfig extends \carono\turbotext\ConfigAbstract
 {
 	/**
+	 * уникальный идентификатор (номер) заказа
+	 *
+	 * @var int
+	 */
+	public $order_id;
+
+	/**
 	 * Нужна ли стоимость за весь заказ? 1 - да, 0 - стоимость за 1000 символов. Необязательный параметр,
 	 * значение по умолчанию - 0.
 	 *
@@ -17,8 +24,8 @@ class EditOrderConfig extends \carono\turbotext\ConfigAbstract
 	public $order_price_for_total;
 
 	/**
-	 * стоимость за 1000 знаков с пробелами (копирайтинг от 29, рерайтинг от 22), если order_price_for_total равен 1, то
-	 * необходимо указать стоимость за весь заказ
+	 * стоимость за 1000 знаков, копирайтинг от 29, рерайтинг от 22, если order_price_for_total равен 1, то необходимо
+	 * указать стоимость за весь заказ
 	 *
 	 * @var int
 	 */

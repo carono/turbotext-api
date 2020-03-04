@@ -7,8 +7,8 @@ require 'ResponseAbstract.php';
 require 'ConfigAbstract.php';
 require 'func.php';
 
-use GuzzleHttp\Client;
 use carono\turbotext\codegen\ClientAbstract;
+use GuzzleHttp\Client;
 
 clearFolder('config');
 clearFolder('request');
@@ -54,8 +54,7 @@ foreach ($desc = $query->find('.api_descr') as $desc) {
         $item['methods'][] = $method;
     }
     $data[] = $item;
-};
+}
 file_put_contents('data.json', json_encode($data));
-
 $abstractClient = new ClientAbstract();
 $abstractClient->renderToFile($data);
